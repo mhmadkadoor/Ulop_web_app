@@ -1,12 +1,17 @@
-
+{% load static %}
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Your Page Title</title>
-    {% load static %}
+   
     <link rel="stylesheet" href="{% static 'css\style.css' %}">
+    {% include "navbar.html" %}
+
+    <title>Your Page Title</title>
+</head> 
     
-</head>
-<body>
+    {% block content %}
     <p class='paragraph'>Random HTML text to test</p>
+    {% endblock %}
+    
 </body>
 </html>
