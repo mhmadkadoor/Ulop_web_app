@@ -5,7 +5,7 @@
     margin: 0;
 }
 body {
-    background: #ffffff;    
+    background: #b72e2e;    
 }
 nav ul{
     display: flex;
@@ -25,9 +25,19 @@ nav ul li a{
     background: rgb(45, 174, 255);
 }
 nav ul li a:hover{
-    background: #002aff;
+    background: #01eb95;
     color: #ffffff;
 }
 p{
     margin-top: 50px;
+}
+.photos{
+    display :flex;
+
+}
+.photoTitle{
+    font-size: 20px;
+    color: #0d00ff;
+    text-align: center;
+    margin-top: 20px;
 }
