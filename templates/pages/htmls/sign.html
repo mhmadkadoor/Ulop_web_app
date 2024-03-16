@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="/login/">
+    {% csrf_token %}
+    <input type="text" name="userid" required placeholder="Student number">
+    <input type="password" name="userPassword" required placeholder="Password">
+    <input type="submit" value="sign in">
+</form>
+    
+{% endblock %}
