@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class = labels>
+<form method="POST" action="{% url 'signup' %}">
+    {% csrf_token %}
+    {% if user_already_exists %}
+        <p>Error: You already have an account.</p>
+    {% endif %}
+    
+        <input type="text" name="username" required placeholder="enter your username">
+        <br>
+        <input type="password"  name="password" required placeholder ="enter your password">
+        <br>
+        <input type="password" name="confirm_password" required placeholder ="confirm your password">
+        <br>
+        {% if passwords_not_match %}
+            <p>Error: Passwords do not match.</p>
+        {% endif %}
+        {% if account_created %}
+            <p>The account has been just created</p>
+        {% endif %}
+
+        <br>
+        <input type="submit" value="Sign Up">
+    </form>
+</div>
+{% endblock content %}

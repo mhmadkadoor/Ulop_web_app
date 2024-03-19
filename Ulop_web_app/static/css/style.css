@@ -65,3 +65,14 @@ p{
    
 }
 /* POSTS END */
+.labels{
+    display: flex;
+    background-color: #2f00ff;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    
+}
