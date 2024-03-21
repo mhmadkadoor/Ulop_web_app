@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class = labels>
+    <form method="POST">
+        <h1>Log in</h1>
+        {% csrf_token %}
+        {% if user_not_exists %}
+            <p>This Account does not exist, Create Account?</p>
+            <li><a href="{% url 'signup' %}">sign up</a></li>
+        {% endif %}
+            <input class="text-1" type="text" name="username" required placeholder="Username">
+            <br>
+            <input class="text-1" type="password"  name="password" required placeholder ="Password">
+            <br>
+        {% if logged_in %}
+           <script>
+            window.location.href = "{% url 'home' %}";
+               </script>
+        {% endif %}
+        {% if password_not_match %}
+        <p>passwords do not match</p>
+        {% endif %}
+            <input class ="btn" type="submit" value="Login">
+        </form>
+    </div>
+{% endblock %}
