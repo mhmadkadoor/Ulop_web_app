@@ -9,17 +9,22 @@
         <p>Error: You already have an account.</p>
     {% endif %}
     
-        <input  class="text-1"  type="text" name="username" required placeholder="Enter your username">
+        <input  class="text-1"  type="text" name="username" required placeholder="Enter your username" onkeypress="return event.charCode !== 32">
         <br>
-        <input  class="text-1"  type="password"  name="password" required placeholder ="Enter your password">
+        <input  class="text-1"  type="password"  name="password" required placeholder ="Enter your password" onkeypress="return event.charCode !== 32">
         <br>
-        <input  class="text-1" type="password" name="confirm_password" required placeholder ="Confirm your password">
+        <input  class="text-1" type="password" name="confirm_password" required placeholder ="Confirm your password" onkeypress="return event.charCode !== 32">
         <br>
         {% if passwords_not_match %}
             <p>Error: Passwords do not match.</p>
         {% endif %}
         {% if account_created %}
-            <p>The account has been just created</p>
+        <p>Account created successfully.</p>
+        <script>
+            setTimeout(function() {
+                window.location.href = "{% url 'login' %}";
+            }, 2000);
+        </script>
         {% endif %}
 
         <br>

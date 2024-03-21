@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class = labels>
+<div class="labels">
     <form method="POST">
         <h1>Log in</h1>
         {% csrf_token %}
@@ -9,19 +9,24 @@
             <p>This Account does not exist, Create Account?</p>
             <li><a href="{% url 'signup' %}">sign up</a></li>
         {% endif %}
-            <input class="text-1" type="text" name="username" required placeholder="Username">
-            <br>
-            <input class="text-1" type="password"  name="password" required placeholder ="Password">
-            <br>
-        {% if logged_in %}
-           <script>
-            window.location.href = "{% url 'home' %}";
-               </script>
+        <input class="text-1" type="text" name="username" required placeholder="Username" onkeypress="return event.charCode !== 32">
+        <br>
+        <input class="text-1" type="password" name="password" required placeholder="Password" onkeypress="return event.charCode !== 32">
+        <br>
+        {% if user.is_authenticated %}
+            <p>You logged in as {{user.username}}</p>
         {% endif %}
         {% if password_not_match %}
-        <p>passwords do not match</p>
+            <p>Password is not correct</p>
         {% endif %}
-            <input class ="btn" type="submit" value="Login">
-        </form>
-    </div>
+        {% if logged_in %}
+        <script>
+            setTimeout(function() {
+                window.location.href = "{% url 'home' %}";
+            }, 2000);
+        </script>
+        {% endif %}
+        <input class="btn" type="submit" value="Login">
+    </form>
+</div>
 {% endblock %}
