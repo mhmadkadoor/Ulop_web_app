@@ -7,7 +7,7 @@
     
 }
 body {
-      background-color: #322a1e;
+     background-color: rgb(103, 70, 27);
 }
 
 /*nav bar start*/
@@ -73,6 +73,7 @@ p{
     display:inline;
     justify-content: space-between;
     margin-top: 50px;
+   
    
     
 }
