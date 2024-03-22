@@ -52,7 +52,9 @@
                     <h3 >{{ post.title }}</h3>
                     <p>{{ post.content }}</p>
                     <p>{{ post.date }}</p>
-                    <img src="{{ post.image.url }}" alt="Post Image">
+                    {% if post.image %}
+                        <img  src="{{ post.image.url }}" alt="Post Image">
+                        {% endif %}
                 </div>
             </div>
     
