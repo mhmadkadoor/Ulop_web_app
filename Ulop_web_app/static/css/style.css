@@ -96,7 +96,7 @@ p{
 .labels{
     
     display: flex;
-    background-image: url(./photo-view.jpg);
+    background-image: url(./view.jpg);
     background-position: center;
     background-size: cover;
     justify-content:center;
