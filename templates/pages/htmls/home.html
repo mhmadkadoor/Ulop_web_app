@@ -2,9 +2,43 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css\style.css' %}">
-{% if logged_in %}
-<p>{{TheUser.username}}</p>
-{% endif %}
-{% include "posts/posts.html" %}
+    <link rel="stylesheet" href="{% static 'css\style.css' %}">
+
+
+    {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'home' %}">
+            {% csrf_token %}
+            <div>
+                <input type="text" name="title" required placeholder="title for your post">
+            </div>
+            <div>
+                <textarea name="content" required placeholder="content"></textarea>
+            </div>
+            <div>
+                <input type="file" name="image" placeholder="image">
+            </div>
+            <div >
+                <select name="visibility" required placeholder="visibility">
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+            </div>
+            <div >
+                <select name="catagory" required placeholder="catagory">
+                    <option value="News">News</option>
+                    <option value="Question">Question</option>
+                    <option value="Even">Event</option>
+                    <option value="Tips">Tips</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Post</button>
+        </form>
+
+    {% endif %}
+
+
+    {% include "posts/posts.html" %}
+
+
 {% endblock content %}

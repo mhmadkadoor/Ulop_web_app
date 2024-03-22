@@ -6,7 +6,24 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home (request):
-    return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
+    if request.method == 'POST':
+        title = str(request.POST.get('title'))
+        content = str(request.POST.get('content'))
+        image = request.FILES.get('image')
+        catagory = request.POST.get('catagory')
+        sender_id = request.user.id
+        sender_name = str(request.user.username)
+        print(f"image: {image}  , image type: {type(image)}")
+        if str(request.POST.get('visibility')) == 'public':
+            active = True
+        else:
+            active = False
+
+        post = Post(title=title, content=content, image=image, catagory=catagory, sender_id=sender_id, sender_name=sender_name, active=active)
+        post.save()
+        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
+    else:
+        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
 def about (request):
     return render(request, 'pages/htmls/about.html')
 def courses (request):
