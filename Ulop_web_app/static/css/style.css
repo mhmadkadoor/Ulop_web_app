@@ -7,7 +7,7 @@
     
 }
 body {
-      background-color: #ffeeb6;
+     background-color: rgb(103, 70, 27);
 }
 
 /*nav bar start*/
@@ -25,10 +25,13 @@ nav .logo{
     margin-left:10px;
     transition: ease 0.5s;
     cursor:pointer;
+    color: rgb(152, 152, 152);
+    transform: scale(1);
 
 }
 nav .logo:hover{
-   color: rgb(148, 131, 81);
+   transform: scale(1.1);
+   color:white;
 
 
 }
@@ -48,12 +51,15 @@ nav ul li a{
     padding: 10px 15px;
     border-radius: 5px;
     transition: 0.5s;
-    background: rgb(148, 131, 81);
+    
     font-family: "Poppins", sans-serif;
 }
 nav ul li a:hover{
-    background: #e7d77c;
+    background: #030200;
     color: #ffffff;
+}
+nav ul li a i{
+    margin-left:5px;
 }
 /*nav bar end*/
 
@@ -67,6 +73,7 @@ p{
     display:inline;
     justify-content: space-between;
     margin-top: 50px;
+   
    
     
 }
@@ -96,7 +103,7 @@ p{
 .labels{
     
     display: flex;
-    background-image: url(./photo-view.jpg);
+    background-image: url(./view-sky3.jpg);
     background-position: center;
     background-size: cover;
     justify-content:center;
@@ -153,6 +160,5 @@ p{
     background-color: #000000;
     color: #ffffff;
     border: 2px solid #ffffff;
-   
-    
+  
 }
