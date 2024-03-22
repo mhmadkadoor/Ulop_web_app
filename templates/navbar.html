@@ -1,0 +1,16 @@
+
+<nav>
+    <div class="logo"><h1>UOLP Chat</div>
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'courses' %}">Courses</a></li>
+        {% if not user.is_authenticated %}
+        <li><a href="{% url 'signup' %}">Sign up</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% elif user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="{% url 'profile' %}">{{user.username}}'Profile</a></li>
+        {% endif %}
+    </ul>
+</nav>
