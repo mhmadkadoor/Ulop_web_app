@@ -1,7 +1,18 @@
-<style>
-    body{
-        background-color: blue;
-    }
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <link rel="stylesheet" href="{% static 'css\style.css' %}">
+    {% include "navbar.html" %}
+    
+    
+    <title>Your Page Title</title>
+</head> 
 
-
-</style>
+    {% block content %}
+    <p class='paragraph'>ONLY Base</p>
+    {% endblock %}
+    
+</body>
+</html>
