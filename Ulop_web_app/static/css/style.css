@@ -7,8 +7,48 @@
     
 }
 body {
-     background-color: rgb(103, 70, 27);
+   
+   
+    
+   
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,87,121,1) 35%, rgba(0,212,255,1) 100%);
 }
+/*post start*/
+form h1{
+    margin-top:10px;
+    color:rgb(0, 0, 0);
+    font-family: "Roboto Mono", monospace;
+}
+form.post-form{
+    background:  #393f4d;
+    display:flex;
+    align-items: center;
+    text-align: center;
+    margin-top:30px;
+    display: inline-block;
+    border:2px solid black;
+
+}
+form .post-t input{
+    margin-top:30px;
+    padding:10px 30px 10px 5px;
+    outline: none;
+    border:none;
+    border-radius:10px;
+    
+}
+form .post-c textarea{
+    margin-top: 5px;
+    padding:10px 30px 60px 5px;
+    outline:none;
+    border-radius:10px;
+    border:none;
+    
+}
+
+
+
+/*post end*/
 
 /*nav bar start*/
 nav {
@@ -46,7 +86,8 @@ nav ul{
 nav ul li a{
     
     font-size: 20px;
-    color: #ffffff;
+   
+    color:#d4d4dc;
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -55,8 +96,8 @@ nav ul li a{
     font-family: "Poppins", sans-serif;
 }
 nav ul li a:hover{
-    background: #030200;
-    color: #ffffff;
+    background: #feda6a;
+    color:  #1d1e22;
 }
 nav ul li a i{
     margin-left:5px;
@@ -67,6 +108,7 @@ nav ul li a i{
 p{
     margin-top: 50px;
 }
+
 
 /* POSTS START */
 .wrapper{
@@ -82,7 +124,7 @@ p{
     width:500px;
     height:auto;
     border-radius: 10px;
-    border:2px solid #000;
+    border:2px solid #c3195d;
     margin-top:20px;
 }
 .photos h3{
@@ -153,13 +195,11 @@ p{
     font-family: "Poppins", sans-serif;
     cursor:pointer;
     transition: ease 0.5s;
-    transform:scale(1)
+    transform:scale(1);
 }
 .labels form .btn:hover{
    transform: scale(1.2);
     background-color: #000000;
     color: #ffffff;
     border: 2px solid #ffffff;
-   
-    
 }

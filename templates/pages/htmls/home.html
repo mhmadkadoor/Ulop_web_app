@@ -8,22 +8,23 @@
     {% if user.is_authenticated %}
         <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div>
+            <div><h1>share post</h1></div>
+            <div class="post-t">
                 <input type="text" name="title" required placeholder="title for your post">
             </div>
-            <div>
-                <textarea name="content" required placeholder="content"></textarea>
+            <div class="post-c">
+                <textarea class="inside-post-c"  name="content" required placeholder="hello everybody" ></textarea>
             </div>
-            <div>
+            <div class="post-i">
                 <input type="file" name="image" placeholder="image">
             </div>
-            <div >
+            <div class="post-pub-pri">
                 <select name="visibility" required placeholder="visibility">
                     <option value="public">Public</option>
                     <option value="private">Private</option>
                 </select>
             </div>
-            <div >
+            <div class="post-category">
                 <select name="catagory" required placeholder="catagory">
                     <option value="News">News</option>
                     <option value="Question">Question</option>
@@ -32,7 +33,7 @@
                     <option value="Other">Other</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Post</button>
+            <button class="post-btn" type="submit" class="btn btn-primary">Post</button>
         </form>
 
     {% endif %}
