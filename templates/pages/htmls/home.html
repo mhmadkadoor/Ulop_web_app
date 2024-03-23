@@ -6,7 +6,7 @@
 
 
     {% if user.is_authenticated %}
-        <form method="POST" action="{% url 'home' %}">
+        <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
                 <input type="text" name="title" required placeholder="title for your post">

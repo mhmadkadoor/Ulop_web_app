@@ -4,7 +4,8 @@
         <div class=photos>
             <h3 >{{ post.title }}</h3>
             <p>{{ post.content }}</p>
-            <p>{{ post.date }}</p>
+            <p>Posted date:{{ post.date_posted }}</p>
+            <p>sender: {{ post.sender_name }}</p>
             {% if post.image %}
             <img  src="{{ post.image.url }}" alt="Post Image">
             {% endif %}
