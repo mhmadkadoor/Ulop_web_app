@@ -8,12 +8,12 @@
     {% if user.is_authenticated %}
         <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div><h1>share post</h1></div>
+            <div><h1>Posts</h1></div>
             <div class="post-t">
-                <input type="text" name="title" required placeholder="title for your post">
+                <input type="text" name="title" required placeholder="Title">
             </div>
             <div class="post-c">
-                <textarea class="inside-post-c"  name="content" required placeholder="hello everybody" ></textarea>
+                <textarea class="inside-post-c"  name="content" required placeholder="Write your post..." ></textarea>
             </div>
             <div class="post-i">
                 <input type="file" name="image" placeholder="image">

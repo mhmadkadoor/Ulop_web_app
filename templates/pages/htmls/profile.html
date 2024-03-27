@@ -1,15 +1,34 @@
 {%extends 'base.html'%}
 {%block content%}
     <h2>Profile Settings</h2>
-
-
     <form method="POST" action="{% url 'profile' %}">
         {% csrf_token %}
-
         <input type="text" name="UsernameField" class="text-1" required placeholder="Username: {{user.username}}" onkeypress="return event.charCode !== 32" readonly>
         <input type="text" name="IdField" class="text-1" required placeholder="User ID: {{user.id}}" onkeypress="return event.charCode !== 32" readonly>
+        {% if user.email %}
+        <input type="text" name="EmailField" class="text-1" required placeholder="{{user.email}}" onkeypress="return event.charCode !== 32" readonly>
+        {% endif %}
+        <h3>Change E-mail</h3>
+        {% if email_changed %}
+            <p>Email changed successfully</p>
+            {% elif email_exists %}
+                <p>Email already exists</p>
+            {% elif None_input %}
+                <p>Email Field empty</p>
+        {% endif %}
+        <div class="form-group">
+            <input type="text" name="NewMail" class="text-1" required placeholder="Enter the new mail:" onkeypress="return event.charCode !== 32">
+        </div>
+        {% if user.email %}
+        <button type="submit" class="btn btn-primary" name="btnMailChange">Change your mail</button>
+        {% else %}
+        <button type="submit" class="btn btn-primary" name="btnMailChange">Add E-mail</button>
+        {% endif %}
+    </form>
 
-
+    
+    <form method="POST" action="{% url 'profile' %}">
+        {% csrf_token %}
         <h3>Change the password</h3>
 
         <div class="form-group">
@@ -24,7 +43,7 @@
             <input type="password" name="new_password2" class="text-1" required placeholder="New Password again" onkeypress="return event.charCode !== 32">
         </div>
 
-        <button type="submit" class="btn btn-primary">Change Password</button>
+        <button type="submit" class="btn btn-primary"name="btnPassChange">Change Password</button>
 
 
 
@@ -56,6 +75,7 @@
                     {% if post.image %}
                         <img src="{{ post.image.url }}" alt="Post Image">
                         {% endif %}
+                    <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
                 </div>
             </div>
     

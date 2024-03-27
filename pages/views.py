@@ -1,10 +1,38 @@
 from django.shortcuts import render
 from posts.models import Post
 from django.contrib.auth.models import User , auth
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+
+
+def edit_post(request, post_id):
+    current_post = Post.objects.get(id=post_id)
+    
+    if request.method == 'POST':
+        title = str(request.POST.get('title'))
+        content = str(request.POST.get('content'))
+        image = request.FILES.get('image')
+        catagory = request.POST.get('catagory')
+        if str(request.POST.get('visibility')) == 'public':
+            active = True
+        else:
+            active = False
+
+        current_post.title = title
+        current_post.content = content
+        current_post.catagory = catagory
+        current_post.active = active
+        if image:
+            current_post.image = image
+        current_post.save()
+        return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': request.user , 'UserS': User.objects.all()})
+    else:
+        return render(request, 'posts/edit_post.html', {'post': current_post})
+
+
 
 def home (request):
     if request.method == 'POST':
@@ -13,7 +41,7 @@ def home (request):
         image = request.FILES.get('image')
         catagory = request.POST.get('catagory')
         sender_id = request.user.id
-        sender_name = str(request.user.username)
+        sender_name = f"{request.user.first_name} {request.user.last_name}"
         print(f'image: {image}, image type: {type(image)}')
         if str(request.POST.get('visibility')) == 'public':
             active = True
@@ -23,8 +51,14 @@ def home (request):
         post = Post(title=title, content=content, catagory=catagory, sender_id=sender_id, sender_name=sender_name, active=active)
         if image:
             post.image = image
-        post.save()
-        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
+        postes = Post.objects.all()
+        for i in range(len(postes)):
+            if postes[i].title != title and postes[i].content != content:
+                post.save()
+                return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
+            return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
+        else:
+            return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
     else:
         return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
 
@@ -37,20 +71,30 @@ def courses (request):
 def profile (request):
     current_user = request.user
     if request.method == 'POST':
-        password = request.POST.get('current_password')
-        password1 = request.POST.get('new_password1')
-        password2 = request.POST.get('new_password2')
-        if current_user.check_password(password):
-            if password1 == password2:
-                current_user.set_password(password1)
-                current_user.save()
-                user = authenticate(request, username=current_user.username, password=password1)
-                auth.login(request, user)
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_changed': True})
+        if 'btnMailChange' in request.POST:
+            if str(request.POST.get('NewMail')) == 'None':
+                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'None_input': True})
+            elif str(request.POST.get('NewMail')) == current_user.email:
+                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_exists': True})
             else:
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'passwords_not_match': True})
-        else:
-            return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True})
+                current_user.email = request.POST.get('NewMail')
+                current_user.save()
+                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_changed': True})
+        elif 'btnPassChange' in request.POST:
+            password = request.POST.get('current_password')
+            password1 = request.POST.get('new_password1')
+            password2 = request.POST.get('new_password2')
+            if current_user.check_password(password):
+                if password1 == password2:
+                    current_user.set_password(password1)
+                    current_user.save()
+                    user = authenticate(request, username=current_user.username, password=password1)
+                    auth.login(request, user)
+                    return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_changed': True})
+                else:
+                    return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'passwords_not_match': True})
+            else:
+                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True})
         
     return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all()})
 
