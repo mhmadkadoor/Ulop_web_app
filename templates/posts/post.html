@@ -9,6 +9,7 @@
             {% if post.image %}
             <img  src="{{ post.image.url }}" alt="Post Image">
             {% endif %}
+            <a href="{% url 'view_post' post.id %}" class="btn btn-primary">go to the post</a>
         </div>
     </div>
 {% endif %}

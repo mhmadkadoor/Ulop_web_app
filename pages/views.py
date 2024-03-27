@@ -6,7 +6,9 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
+def view_post(request, post_id):
+    current_post = Post.objects.get(id=post_id)
+    return render(request, 'posts/view_post.html', {'post': current_post})
 
 def edit_post(request, post_id):
     current_post = Post.objects.get(id=post_id)
