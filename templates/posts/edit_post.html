@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if user.id == post.sender_id or user.is_superuser %}
 <form method="POST" action="{% url 'edit_post' post.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     <div><h1>Post</h1></div>
@@ -28,6 +29,19 @@
             <option value="Other">Other</option>
         </select>
     </div>
-    <button class="post-btn" type="submit" class="btn btn-primary">Post</button>
+    <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostEdite'>Post</button>
 </form>
+<form method="POST" action="{% url 'edit_post' post.id %}">
+    {% csrf_token %}
+    <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostDelete'>Delete the post</button>
+</form>
+{% else %}
+<p style="color: red;">You are not allowed to change the post.</p>
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'home' %}";
+    }, 2000);
+</script>
+    
+{% endif %}
 {% endblock %}

@@ -8,7 +8,8 @@
         <p>{{ post.sender_name }}</p>
         {% if post.image %}
         <img  src="{{ post.image.url }}" alt="Post Image">
-        {% endif %}
+        {% endif %} 
+        {% include 'comments/comments.html' %}
     </div>
 </div>
 {% endblock %}

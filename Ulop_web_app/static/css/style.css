@@ -205,3 +205,23 @@ p{
     color: #ffffff;
     border: 2px solid #ffffff;
 }
+
+.comment {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #10ffeb;
+    font-family: "Poppins", sans-serif;
+    color: #000000;
+    height: 80px;
+    width: 88%;
+}
+.comment p{
+    position: absolute;
+    left: 10px;
+    top:-50px;
+}

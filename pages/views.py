@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from posts.models import Post
+from posts.models import Post, Comment
 from django.contrib.auth.models import User , auth
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
@@ -7,65 +7,72 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def view_post(request, post_id):
+    comments = Comment.objects.all()
     current_post = Post.objects.get(id=post_id)
-    return render(request, 'posts/view_post.html', {'post': current_post})
+    return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
 
 def edit_post(request, post_id):
     current_post = Post.objects.get(id=post_id)
     
     if request.method == 'POST':
-        title = str(request.POST.get('title'))
-        content = str(request.POST.get('content'))
-        image = request.FILES.get('image')
-        catagory = request.POST.get('catagory')
-        if str(request.POST.get('visibility')) == 'public':
-            active = True
-        else:
-            active = False
+        if 'btnPostEdite' in request.POST:
+            title = str(request.POST.get('title'))
+            content = str(request.POST.get('content'))
+            image = request.FILES.get('image')
+            catagory = request.POST.get('catagory')
+            if str(request.POST.get('visibility')) == 'public':
+                active = True
+            else:
+                active = False
 
-        current_post.title = title
-        current_post.content = content
-        current_post.catagory = catagory
-        current_post.active = active
-        if image:
-            current_post.image = image
-        current_post.save()
-        return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': request.user , 'UserS': User.objects.all()})
+            current_post.title = title
+            current_post.content = content
+            current_post.catagory = catagory
+            current_post.active = active
+            if image:
+                current_post.image = image
+            current_post.save()
+            return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': request.user , 'UserS': User.objects.all()})
+        elif 'btnPostDelete' in request.POST:
+            current_post.delete()
+            return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': request.user , 'UserS': User.objects.all()})
     else:
         return render(request, 'posts/edit_post.html', {'post': current_post})
 
 
 
 def home (request):
+    current_user = request.user
+    comments = Comment.objects.all()
     if request.method == 'POST':
         title = str(request.POST.get('title'))
         content = str(request.POST.get('content'))
         image = request.FILES.get('image')
         catagory = request.POST.get('catagory')
-        sender_id = request.user.id
-        if request.user.first_name == '' and request.user.last_name == '':
-            sender_name = request.user.username
+        sender_id = current_user.id
+        if current_user.first_name == '' and current_user.last_name == '':
+            sender_name = current_user.username
         else:
-            sender_name = f"{request.user.first_name} {request.user.last_name}"
+            sender_name = f"{current_user.first_name} {current_user.last_name}"
         print(f'image: {image}, image type: {type(image)}')
         if str(request.POST.get('visibility')) == 'public':
             active = True
         else:
             active = False
 
-        post = Post(title=title, content=content, catagory=catagory, sender_id=sender_id, sender_name=sender_name, active=active)
+        post = Post(title=title, content=content, catagory=catagory, sender_id=sender_id, sender_name=sender_name, active=active, owner=current_user)
         if image:
             post.image = image
         postes = Post.objects.all()
         for i in range(len(postes)):
             if postes[i].title != title and postes[i].content != content:
                 post.save()
-                return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
-            return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
+                return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
+            return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
         else:
-            return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
+            return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
     else:
-        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': request.user})
+        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
 
 def about (request):
     return render(request, 'pages/htmls/about.html')
@@ -100,14 +107,20 @@ def profile (request):
                     return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'passwords_not_match': True})
             else:
                 return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True})
+        elif 'btnDeleteAccount' in request.POST:
+            current_user.delete()
+            return redirect('home')
         
     return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all()})
 
 def sign(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
+        username = str(request.POST.get('username'))
+        password = str(request.POST.get('password'))
+        confirm_password = str(request.POST.get('confirm_password'))
+        first_name = str(request.POST.get('first_name'))
+        last_name = str(request.POST.get('last_name'))
+        email = str(request.POST.get('email'))
         if str(password) != str(confirm_password):
             print(f"Password: {password} Confirm Password: {confirm_password}")
             return render(request, 'pages/htmls/sign.html', {'passwords_not_match': True, 'user_already_exists': False,'account_created': False})
@@ -125,7 +138,7 @@ def sign(request):
             # Return user_already_exist as true
                 return render(request, 'pages/htmls/sign.html', {'passwords_not_match': False,'user_already_exists': True,'account_created': False})
             else:
-                user = User.objects.create_user(username=username, password=password)
+                user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name, email=email)
                 user.save()
                 return render(request, 'pages/htmls/sign.html', {'passwords_not_match': False,'user_already_exists': False ,'account_created': True})
     else:  
