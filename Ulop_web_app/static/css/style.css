@@ -8,10 +8,7 @@
 }
 body {
    
-   
-    
-   
-background: linear-gradient(90deg, rgb(233, 233, 237) 0%, rgba(9,87,121,1) 35%, rgba(0,212,255,1) 100%);
+background-color: rgb(83, 145, 124);
 }
 /*post start*/
 form h1{
@@ -19,14 +16,24 @@ form h1{
     color:rgb(0, 0, 0);
     font-family: "Roboto Mono", monospace;
 }
-form.post-form{
-    background:  #393f4d;
+.wrapper-post{
+    margin-top: 30px;
+    position: relative;
+    width:100vh;
+    height:500px;
+    border:2px solid black;
+}
+form{
+    position: absolute;
+    background: rgb(0, 0, 0,0.2);
     display:flex;
     align-items: center;
     text-align: center;
     margin-top:30px;
     display: inline-block;
-    border:2px solid black;
+    border-radius: 10px;
+    
+    
 
 }
 form .post-t input{
@@ -112,15 +119,10 @@ p{
 
 /* POSTS START */
 .wrapper{
-    display:inline;
-    justify-content: space-between;
-    margin-top: 50px;
-   
-   
-    
+    display:inline-flex;
 }
 .photos{
-   
+   display: inline;
     width:500px;
     height:auto;
     border-radius: 10px;

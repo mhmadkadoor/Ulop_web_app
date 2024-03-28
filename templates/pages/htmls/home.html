@@ -6,6 +6,7 @@
 
 
     {% if user.is_authenticated %}
+    <div class="wrapper-post">
         <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div><h1>Posts</h1></div>
@@ -35,6 +36,7 @@
             </div>
             <button class="post-btn" type="submit" class="btn btn-primary">Post</button>
         </form>
+    </div>
 
     {% endif %}
 
