@@ -43,7 +43,10 @@ def home (request):
         image = request.FILES.get('image')
         catagory = request.POST.get('catagory')
         sender_id = request.user.id
-        sender_name = f"{request.user.first_name} {request.user.last_name}"
+        if request.user.first_name == '' and request.user.last_name == '':
+            sender_name = request.user.username
+        else:
+            sender_name = f"{request.user.first_name} {request.user.last_name}"
         print(f'image: {image}, image type: {type(image)}')
         if str(request.POST.get('visibility')) == 'public':
             active = True

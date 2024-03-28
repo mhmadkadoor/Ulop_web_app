@@ -85,7 +85,7 @@
 
     {% if user.is_superuser %}
         {% for uSer in UserS %}
-            <h3>Username: {{uSer.username}}</h3>
+            <h3>Username: {{uSer.first_name}}</h3>
             <h3>User ID: {{uSer.id}}</h3>
             {%endfor%}
     {% endif %}
