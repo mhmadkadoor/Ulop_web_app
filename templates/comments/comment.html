@@ -4,5 +4,8 @@
         <p>{{ comment.sender_name }}<br>
         {{ comment.content }}  <br>
         {{ comment.date_posted }}</p>
+        <br></br>
+        
+        {% include 'form/edit_comment_btn.html' %}
     </div>
     {% endif %}

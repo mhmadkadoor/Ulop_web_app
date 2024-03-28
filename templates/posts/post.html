@@ -14,6 +14,9 @@
             {% if user.is_superuser %}
             <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
             {% endif %}
+            {% if user.is_authenticated %}
+                {% include 'form/add_comment.html' %}
+            {% endif %}
             {% include 'comments/comments.html' %}
         </div>
     </div>

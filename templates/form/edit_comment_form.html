@@ -1,0 +1,7 @@
+<form method="POST" action="{% url 'edit_comment_page' comment.id %}">
+    {% csrf_token %}
+    <label for="comment">Comment:</label>
+    <textarea name="comment_content" rows="4" cols="50">{{ comment }}</textarea>
+    <br>
+    <input type="submit" value="Save">
+</form>

@@ -174,3 +174,37 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+def add_comment(request, post_id):
+    comments = Comment.objects.all()
+    current_post = Post.objects.get(id=post_id)
+    current_user = request.user
+    if request.method == 'POST':
+        content = str(request.POST.get('comment_content'))
+        sender_id = current_user.id
+        if current_user.first_name == '' and current_user.last_name == '':
+            sender_name = current_user.username
+        else:
+            sender_name = f"{current_user.first_name} {current_user.last_name}"
+        comment = Comment(post=current_post, content=content, sender_id=sender_id, sender_name=sender_name)
+        comment.save()
+        return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
+    else:
+        return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
+    
+def delete_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    post = comment.post
+    comment.delete()
+    return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
+
+def edit_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    post = comment.post
+    if request.method == 'POST':
+        content = str(request.POST.get('comment_content'))
+        comment.content = content
+        comment.save()
+        return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
+    else:
+        return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': request.user })
