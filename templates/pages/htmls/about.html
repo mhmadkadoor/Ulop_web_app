@@ -1,28 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="about_us_container">
+  <div class="about_us_wrapper">
+    <div class="about_us_person person1">
+      <h1>BACK-END</h1>
+      <h1><i class="fa-solid fa-gears"></i></span>
+      <p>Muhammed Hadi Said Elkaddour</p>
+    </div>
 
-{% block content %}
-    <h1>About Us</h1>
-    <p>We are a team of professionals with years of experience in our respective fields. Our goal is to provide high-quality services and solutions to our clients.</p>
-    <style>
-        .professional {
-            font-weight: bold;
-            color: blue;
-        }
+    <div class="about_us_person person2">
+      <h1>FRONT-END</h1>
+      <h1><i class="fa-solid fa-code"></i></h1>
+      <p>Fethi Öcalan</p>
+    </div>
 
-        .slide-in {
-            animation: slide-in 1s ease-in-out;
-        }
-
-        @keyframes slide-in {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(0);
-            }
-        }
-    </style>
-
-    <p class="professional slide-in">We take pride in our professionalism and strive to deliver exceptional results.</p>
-    <p>Welcome to our website! We are a team of dedicated professionals...</p>
+    <div class="about_us_person person3">
+      <h1>DOCUMENTOR</h1>
+      <h1><i class="fa-solid fa-file"></i></h1>
+      <p>Abubakar Bammami Isa</p>
+    </div>
+  </div>
+</div>
 {% endblock %}

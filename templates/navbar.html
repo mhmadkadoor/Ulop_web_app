@@ -12,8 +12,8 @@
         <li><a href="{% url 'signup' %}">Sign up<i class="fa-solid fa-user-plus"></i></a></li>
         <li><a href="{% url 'login' %}">Login<i class="fa-solid fa-right-to-bracket"></i></a></li>
         {% elif user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-        <li><a href="{% url 'profile' %}">{{user.username}}'Profile</a></li>
+        <li><a href="{% url 'logout' %}">Logout<i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></a></li>
+        <li><a href="{% url 'profile' %}">{{user.username}}'Profile<i class="fa-solid fa-user"></i></a></li>
         {% endif %}
     </ul>
 </nav>
