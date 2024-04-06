@@ -6,9 +6,15 @@
         <p>{{ post.content }}</p>
         <p>Posted date:{{ post.date_posted }}</p>
         <p>{{ post.sender_name }}</p>
+
         {% if post.image %}
-        <img  src="{{ post.image.url }}" alt="Post Image">
+            <img  src="{{ post.image.url }}" alt="Post Image">
         {% endif %}
+
+        {% if user.is_authenticated %}
+                {% include 'form/add_comment.html' %}
+        {% endif %}
+        {% include 'comments/comments.html' %}
     </div>
 </div>
 {% endblock %}

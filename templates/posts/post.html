@@ -4,13 +4,23 @@
       <h3>{{ post.title }}</h3>
       <div class="posted_p_i">
         <p>{{ post.content }}</p>
-        {% if post.image %}
+      {% if post.image %}
         <img src="{{ post.image.url }}" alt="Post Image" />
-        {% endif %}
+      {% endif %}
       </div>
+      <p>{{ post.catagory }}</p>
       <p class="posted_sender">{{ post.sender_name }}</p>
       <p class="posted_date">{{ post.date_posted }}</p>
       <a href="{% url 'view_post' post.id %}" class="btn btn-primary">go to the post</a>
+      {% if user.is_superuser %}
+        <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
+      {% endif %}
+
+      {% if user.is_authenticated %}
+        {% include 'form/add_comment.html' %}
+      {% endif %}
+
+      {% include 'comments/comments.html' %}
     </div>
   </div>
 

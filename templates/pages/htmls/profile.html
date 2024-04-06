@@ -105,7 +105,10 @@
         {% endfor %}
     </div>
 {% endif %}
-
+<form method="POST" action="{% url 'profile' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger" name="btnDeleteAccount">Delete Account</button>
+</form>
 
 
     
