@@ -12,7 +12,7 @@
       <p class="posted_sender">{{ post.sender_name }}</p>
       <p class="posted_date">{{ post.date_posted }}</p>
       <a href="{% url 'view_post' post.id %}" class="btn btn-primary">go to the post</a>
-      {% if user.is_superuser %}
+      {% if user.is_superuser or post.sender_id == user.id %}
         <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
       {% endif %}
 

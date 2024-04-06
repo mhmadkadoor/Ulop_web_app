@@ -36,10 +36,12 @@
     <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostDelete'>Delete the post</button>
 </form>
 {% else %}
-<p style="color: red;">You are not allowed to change the post.</p>
+<div> <p style="color: red;">You are not allowed to change the post.</p>
+</div>
+
 <script>
     setTimeout(function() {
-        window.location.href = "{% url 'home' %}";
+        window.location.href = "{% url 'view_post' post.id %}";
     }, 2000);
 </script>
     
