@@ -122,7 +122,6 @@ def sign(request):
         last_name = str(request.POST.get('last_name'))
         email = str(request.POST.get('email'))
         if str(password) != str(confirm_password):
-            print(f"Password: {password} Confirm Password: {confirm_password}")
             return render(request, 'pages/htmls/sign.html', {'passwords_not_match': True, 'user_already_exists': False,'account_created': False})
         else:
             users_list = User.objects.all()
