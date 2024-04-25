@@ -186,7 +186,17 @@ def add_comment(request, post_id):
         else:
             sender_name = f"{current_user.first_name} {current_user.last_name}"
         comment = Comment(post=current_post, content=content, sender_id=sender_id, sender_name=sender_name)
-        comment.save()
+        is_unique_comment = True
+        for existing_comment in comments:
+            if (existing_comment.content == content) and (existing_comment.sender_id == sender_id) and (existing_comment.post == current_post):
+                is_unique_comment = False
+                break
+        if is_unique_comment:
+            comment.save()
+            print('Comment saved')
+        else:
+            print('Duplicate comment not saved')
+        
         return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
     else:
         return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
@@ -198,12 +208,19 @@ def delete_comment(request, comment_id):
     return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
 
 def edit_comment(request, comment_id):
+    comments = Comment.objects.all()
     comment = Comment.objects.get(id=comment_id)
     post = comment.post
     if request.method == 'POST':
         content = str(request.POST.get('comment_content'))
         comment.content = content
-        comment.save()
+        is_unique_comment = True
+        for existing_comment in comments:
+            if (existing_comment.content == content) and (existing_comment.sender_id == comment.sender_id) and (existing_comment.post == post):
+                is_unique_comment = False
+                break
+        if is_unique_comment:
+            comment.save()
         return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
     else:
         return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': request.user })
