@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if user.id == comment.sender_id or user.is_superuser %}
     {% include 'form/edit_comment_form.html' %}
+{% else %}
+    <h1>403 Forbidden</h1>
+    <p>You are not allowed to edit this comment.</p>
+    <script>
+        setTimeout(function () {
+          window.location.href = "{% url 'home' %}";
+        }, 10000);
+      </script> 
+{% endif %}
 {% endblock %}

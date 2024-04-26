@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css\style.css' %}">
 
 
     {% if user.is_authenticated %}
@@ -14,33 +12,37 @@
                 <input type="text" name="title" required placeholder="Title">
             </div>
             <div class="post-c">
-                <textarea class="inside-post-c"  name="content" required placeholder="Write your post..." ></textarea>
+                <textarea class="inside-post-c" name="content" required placeholder="Write your post..."></textarea>
             </div>
-        <div class="post_flex">
-            <div class="file-input-wrapper">
-                <input type="file" name="image" id="myFileInput">
-                <label for="myFileInput" class="file-input-button">Choose File</label>
-              </div>
-            <div class="post-pub-pri">
-                <select name="visibility" required placeholder="visibility">
-                    <option value="public">Public</option>
-                    <option value="private">Private</option>
-                </select>
+            <div class="post_flex">
+                <div class="file-input-wrapper">
+                    <input type="file" name="image" accept="image/*">
+                    <label for="image" class="file-input-button">Choose Image</label>
+                </div>
+                <div class="file-input-wrapper">
+                    <input type="file" name="pdf" accept=".pdf">
+                    <label for="pdf" class="file-input-button">Choose PDF</label>
+                </div>
+                <div class="post-pub-pri">
+                    <select name="visibility">
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+                </div>
+                <div class="post-category">
+                    <select name="category" required placeholder="category">
+                        <option value="News">News</option>
+                        <option value="Question">Question</option>
+                        <option value="Event">Event</option>
+                        <option value="Tips">Tips</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <button class="post-btn" type="submit" class="btn btn-primary">Post</button>
             </div>
-            <div class="post-category">
-                <select name="catagory" required placeholder="catagory">
-                    <option value="News">News</option>
-                    <option value="Question">Question</option>
-                    <option value="Even">Event</option>
-                    <option value="Tips">Tips</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <button class="post-btn" type="submit" class="btn btn-primary">Post</button>
-        </div>
         </form>
     </div>
-
+    
     {% endif %}
 
 

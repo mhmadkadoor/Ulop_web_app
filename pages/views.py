@@ -41,43 +41,40 @@ def edit_post(request, post_id):
 
 
 
-def home (request):
+def home(request):
     current_user = request.user
     comments = Comment.objects.all()
     if request.method == 'POST':
-        title = str(request.POST.get('title'))
-        content = str(request.POST.get('content'))
+        title = request.POST.get('title')
+        content = request.POST.get('content')
         image = request.FILES.get('image')
-        catagory = request.POST.get('catagory')
+        category = request.POST.get('category')
+        pdf = request.FILES.get('pdf')  # Get the PDF from the request
         sender_id = current_user.id
-        if current_user.first_name == '' and current_user.last_name == '':
+
+        if not current_user.first_name and not current_user.last_name:
             sender_name = current_user.username
         else:
             sender_name = f"{current_user.first_name} {current_user.last_name}"
-        print(f'image: {image}, image type: {type(image)}')
-        if str(request.POST.get('visibility')) == 'public':
-            active = True
-        else:
-            active = False
+        active = request.POST.get('visibility') == 'public'
 
-        post = Post(title=title, content=content, catagory=catagory, sender_id=sender_id, sender_name=sender_name, active=active, owner=current_user)
-        if image:
-            post.image = image
-        postes = Post.objects.all()
-        for i in range(len(postes)):
-            if postes[i].title != title and postes[i].content != content:
-                post.save()
-                return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
-            return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
-        else:
-            return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
+        # Check if a post with the same title, content, and sender_id already exists
+        if not Post.objects.filter(title=title, content=content, sender_id=sender_id).exists():
+            post = Post(title=title, content=content, category=category, sender_id=sender_id, sender_name=sender_name, active=active, owner=current_user)
+            if image:
+                post.image = image
+            if pdf:
+                post.pdf = pdf
+            post.save()
+            print('Post saved')
+
+        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
     else:
         return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
 
 def about (request):
     return render(request, 'pages/htmls/about.html')
-def courses (request):
-    return render(request, 'pages/htmls/courses.html')
+
 
 @login_required(login_url='login')
 def profile (request):
@@ -122,7 +119,6 @@ def sign(request):
         last_name = str(request.POST.get('last_name'))
         email = str(request.POST.get('email'))
         if str(password) != str(confirm_password):
-            print(f"Password: {password} Confirm Password: {confirm_password}")
             return render(request, 'pages/htmls/sign.html', {'passwords_not_match': True, 'user_already_exists': False,'account_created': False})
         else:
             users_list = User.objects.all()
@@ -176,19 +172,28 @@ def logout(request):
     return redirect('home')
 
 def add_comment(request, post_id):
-    comments = Comment.objects.all()
     current_post = Post.objects.get(id=post_id)
+    comments = current_post.comments.all()
     current_user = request.user
+
     if request.method == 'POST':
-        content = str(request.POST.get('comment_content'))
+        content = request.POST.get('comment_content').strip()
         sender_id = current_user.id
+
+        if not content:
+            return redirect('view_post', post_id=post_id)  
+
         if current_user.first_name == '' and current_user.last_name == '':
             sender_name = current_user.username
         else:
             sender_name = f"{current_user.first_name} {current_user.last_name}"
-        comment = Comment(post=current_post, content=content, sender_id=sender_id, sender_name=sender_name)
-        comment.save()
-        return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
+
+        is_unique_comment = not Comment.objects.filter(content=content, sender_id=sender_id, post=current_post).exists()
+
+        if is_unique_comment:
+            Comment.objects.create(post=current_post, content=content, sender_id=sender_id, sender_name=sender_name)
+
+        return redirect('view_post', post_id=post_id)  
     else:
         return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
     
@@ -199,12 +204,19 @@ def delete_comment(request, comment_id):
     return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
 
 def edit_comment(request, comment_id):
+    comments = Comment.objects.all()
     comment = Comment.objects.get(id=comment_id)
     post = comment.post
     if request.method == 'POST':
         content = str(request.POST.get('comment_content'))
         comment.content = content
-        comment.save()
+        is_unique_comment = True
+        for existing_comment in comments:
+            if (existing_comment.content == content) and (existing_comment.sender_id == comment.sender_id) and (existing_comment.post == post):
+                is_unique_comment = False
+                break
+        if is_unique_comment:
+            comment.save()
         return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
     else:
         return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': request.user })

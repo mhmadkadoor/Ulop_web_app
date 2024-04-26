@@ -7,6 +7,10 @@
        {% if post.image %}
         <img src="{{ post.image.url }}" alt="Post Image" />
        {% endif %}
+       {% if post.pdf %}
+          <!-- Updated link for downloading the PDF -->
+          <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn btn-primary">Download PDF</a>
+        {% endif %}
        <div class="btn_edit_go">
         <a href="{% url 'view_post' post.id %}" class="btn btn-primary_go">go to the post</a>
         {% if user.is_superuser or post.sender_id == user.id %}
@@ -14,7 +18,7 @@
         {% endif %}
        </div>
       </div>
-      <p>{{ post.catagory }}</p>
+      <p>{{ post.get_category_display }}</p>
       <p class="posted_sender">{{ post.sender_name }}</p>
       <p class="posted_date">{{ post.date_posted }}</p>
       
@@ -22,8 +26,7 @@
         {% include 'form/add_comment.html' %}
       {% endif %}
 
-      {% include 'comments/comments.html' %}
+      {% include 'comments/commentsLimited.html' %}
     </div>
   </div>
-
 {% endif %}
