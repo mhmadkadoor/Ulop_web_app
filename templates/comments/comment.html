@@ -1,11 +1,11 @@
 
 {% if comment.post.id == post.id %}
     <div class="comment">
-        <p>{{ comment.sender_name }}<br>
-        {{ comment.content }}  <br>
-        {{ comment.date_posted }}</p>
-        <br></br>
+        <h2 class="comment_user">{{ comment.sender_name }}<h1>
+
+        <h4 class="comment_content">{{ comment.content }}</h4>
         
+        <h4 class="comment_date">{{ comment.date_posted }}</h4>
         {% include 'form/edit_comment_btn.html' %}
     </div>
     {% endif %}
