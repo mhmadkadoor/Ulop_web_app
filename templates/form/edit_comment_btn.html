@@ -1,4 +1,7 @@
 {% if user.id == comment.sender_id or user.is_superuser %}
-    <a href="{% url 'edit_comment_page' comment.id %}" class="btn btn-primary"><br>Edit</a>
-    <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger"><br>Delete</a>
+<div class="comment_btn_delete_edit">
+    <a class="comment_edit_delete_btn" href="{% url 'edit_comment_page' comment.id %}" class="btn btn-primary"><br>Edit</a>
+   
+    <a class="comment_edit_delete_btn" href="{% url 'delete_comment' comment.id %}" class="btn btn-danger"><br>Delete</a>
+</div>
 {% endif %}
