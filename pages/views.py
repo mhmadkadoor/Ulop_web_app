@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from posts.models import Post, Comment
+from django.db import transaction
 from django.contrib.auth.models import User , auth
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+import os
 # Create your views here.
 
 def view_post(request, post_id):
@@ -11,33 +13,50 @@ def view_post(request, post_id):
     current_post = Post.objects.get(id=post_id)
     return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
 
+@transaction.atomic
 def edit_post(request, post_id):
     current_post = Post.objects.get(id=post_id)
     
     if request.method == 'POST':
         if 'btnPostEdite' in request.POST:
-            title = str(request.POST.get('title'))
-            content = str(request.POST.get('content'))
+            title = request.POST.get('title')
+            content = request.POST.get('content')
+            category = request.POST.get('category')
+            visibility = request.POST.get('visibility')
+            active = visibility == 'public'
             image = request.FILES.get('image')
-            catagory = request.POST.get('catagory')
-            if str(request.POST.get('visibility')) == 'public':
-                active = True
-            else:
-                active = False
+            pdf = request.FILES.get('pdf')
+
+            # Delete the old image if a new image is uploaded
+            if image and current_post.image:
+                old_image_path = current_post.image.path
+                if os.path.isfile(old_image_path):
+                    os.remove(old_image_path)
+
+            # Delete the old PDF if a new PDF is uploaded
+            if pdf and current_post.pdf:
+                old_pdf_path = current_post.pdf.path
+                if os.path.isfile(old_pdf_path):
+                    os.remove(old_pdf_path)
 
             current_post.title = title
             current_post.content = content
-            current_post.catagory = catagory
+            current_post.category = category
             current_post.active = active
             if image:
                 current_post.image = image
+            if pdf:
+                current_post.pdf = pdf
             current_post.save()
-            return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': request.user , 'UserS': User.objects.all()})
+            return redirect('profile')  # Assuming you have a 'profile' named URL pattern
+
         elif 'btnPostDelete' in request.POST:
             current_post.delete()
-            return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': request.user , 'UserS': User.objects.all()})
+            return redirect('profile')  # Assuming you have a 'profile' named URL pattern
+
     else:
         return render(request, 'posts/edit_post.html', {'post': current_post})
+
 
 
 

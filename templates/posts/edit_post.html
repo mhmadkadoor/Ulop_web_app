@@ -11,8 +11,13 @@
     <div class="post-c">
         <textarea class="inside-post-c" name="content" required>{{ post.content }}</textarea>
     </div>    
+    image
     <div class="file-input-wrapper">
-        <input type="file" name="image" >
+        <input type="file" name="image" accept="image/*" >
+    </div>
+    pdf
+    <div class="file-input-wrapper">
+        <input type="file" name="pdf" accept=".pdf" >
     </div>
     <div class="post-pub-pri">
         <select name="visibility" required value=>
