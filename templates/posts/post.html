@@ -8,7 +8,6 @@
         <img src="{{ post.image.url }}" alt="Post Image" />
        {% endif %}
        {% if post.pdf %}
-          <!-- Updated link for downloading the PDF -->
           <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn btn-primary">Download PDF</a>
         {% endif %}
        <div class="btn_edit_go">

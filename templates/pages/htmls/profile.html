@@ -1,6 +1,8 @@
 {%extends 'base.html'%}
 {%block content%}
 
+
+
   <div class="profile_setting_container">
 <div class="profile_setting_wrapper">
       <h2>Profile Settings</h2>
@@ -84,7 +86,10 @@
                     <p>sender: {{ post.sender_name }}</p>
                     {% if post.image %}
                         <img src="{{ post.image.url }}" alt="Post Image">
-                        {% endif %}
+                    {% endif %}
+                    {% if post.pdf %}
+                        <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn btn-primary">Download PDF</a>
+                    {% endif %}
                     <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
                     <a href="{% url 'view_post' post.id %}" class="btn btn-primary">go to the post</a>
                 </div>

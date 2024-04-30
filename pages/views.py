@@ -177,13 +177,13 @@ def login(request):
             if user_1.check_password(password):
                 user = authenticate(request, username=username, password=password)
                 auth.login(request, user)
-                return render(request, 'pages/htmls/login.html', {'user_not_exists': False, 'password_not_match': False, 'logged_in': True, 'user': request.user})
+                return render(request, 'pages/htmls/login.html', {'logged_in': True, 'user': request.user})
             else:
-                return render(request, 'pages/htmls/login.html', {'user_not_exists': False, 'password_not_match': True, 'logged_in': False})
+                return render(request, 'pages/htmls/login.html', {'password_not_match': True})
         else:
-            return render(request, 'pages/htmls/login.html', {'user_not_exists': True, 'password_not_match': False, 'logged_in': False})
+            return render(request, 'pages/htmls/login.html', {'user_not_exists': True})
     else:
-        return render(request, 'pages/htmls/login.html', {'user_not_exists': False, 'password_not_match': False, 'logged_in': False})
+        return render(request, 'pages/htmls/login.html')
 
 @login_required(login_url='login')
 def logout(request):
