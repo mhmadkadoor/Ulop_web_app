@@ -11,8 +11,13 @@
     <div class="post-c">
         <textarea class="inside-post-c" name="content" required>{{ post.content }}</textarea>
     </div>    
+    image
     <div class="file-input-wrapper">
-        <input type="file" name="image" >
+        <input type="file" name="image" accept="image/*" >
+    </div>
+    pdf
+    <div class="file-input-wrapper">
+        <input type="file" name="pdf" accept=".pdf" >
     </div>
     <div class="post-pub-pri">
         <select name="visibility" required value=>
@@ -36,7 +41,8 @@
     <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostDelete'>Delete the post</button>
 </form>
 {% else %}
-<div> <p style="color: red;">You are not allowed to change the post.</p>
+<div> <h1 style="color: red;">403 Forbidden</h1>
+    <p style="color: red;">You are not allowed to change the post.</p>
 </div>
 
 <script>
