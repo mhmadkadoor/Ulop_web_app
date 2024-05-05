@@ -87,12 +87,12 @@ def home(request):
             post.save()
             print('Post saved')
 
-        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
+        return render(request, 'pages/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
     else:
-        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
+        return render(request, 'pages/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
 
 def about (request):
-    return render(request, 'pages/htmls/about.html')
+    return render(request, 'pages/about.html')
 
 
 @login_required(login_url='login')
@@ -101,13 +101,13 @@ def profile (request):
     if request.method == 'POST':
         if 'btnMailChange' in request.POST:
             if str(request.POST.get('NewMail')) == 'None':
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'None_input': True})
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'None_input': True})
             elif str(request.POST.get('NewMail')) == current_user.email:
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_exists': True})
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_exists': True})
             else:
                 current_user.email = request.POST.get('NewMail')
                 current_user.save()
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_changed': True})
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_changed': True})
         elif 'btnPassChange' in request.POST:
             password = request.POST.get('current_password')
             password1 = request.POST.get('new_password1')
@@ -118,16 +118,23 @@ def profile (request):
                     current_user.save()
                     user = authenticate(request, username=current_user.username, password=password1)
                     auth.login(request, user)
-                    return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_changed': True})
+                    return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_changed': True})
                 else:
-                    return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'passwords_not_match': True})
+                    return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user, 'passwords_not_match': True})
             else:
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True})
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True})
         elif 'btnDeleteAccount' in request.POST:
             current_user.delete()
             return redirect('home')
         
-    return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all()})
+    return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all()})
+
+
+
+def view_profile(request, user_id):
+    current_user = request.user
+    return render(request, 'pages/view_profile.html', {'user': current_user, 'posts': Post.objects.all(), 'page': User.objects.get(id=user_id)})
+
 
 def sign(request):
     if request.method == 'POST':
@@ -138,7 +145,7 @@ def sign(request):
         last_name = str(request.POST.get('last_name'))
         email = str(request.POST.get('email'))
         if str(password) != str(confirm_password):
-            return render(request, 'pages/htmls/sign.html', {'passwords_not_match': True, 'user_already_exists': False,'account_created': False})
+            return render(request, 'pages/sign.html', {'passwords_not_match': True, 'user_already_exists': False,'account_created': False})
         else:
             users_list = User.objects.all()
             for i in range(len(users_list)):
@@ -151,13 +158,13 @@ def sign(request):
     
             if user_already_exist:
             # Return user_already_exist as true
-                return render(request, 'pages/htmls/sign.html', {'passwords_not_match': False,'user_already_exists': True,'account_created': False})
+                return render(request, 'pages/sign.html', {'passwords_not_match': False,'user_already_exists': True,'account_created': False})
             else:
                 user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name, email=email)
                 user.save()
-                return render(request, 'pages/htmls/sign.html', {'passwords_not_match': False,'user_already_exists': False ,'account_created': True})
+                return render(request, 'pages/sign.html', {'passwords_not_match': False,'user_already_exists': False ,'account_created': True})
     else:  
-        return render(request, 'pages/htmls/sign.html', {'passwords_not_match': False,'user_already_exists': False,'account_created': False })
+        return render(request, 'pages/sign.html', {'passwords_not_match': False,'user_already_exists': False,'account_created': False })
 
 def login(request):
     if request.method == 'POST':
@@ -177,13 +184,13 @@ def login(request):
             if user_1.check_password(password):
                 user = authenticate(request, username=username, password=password)
                 auth.login(request, user)
-                return render(request, 'pages/htmls/login.html', {'logged_in': True, 'user': request.user})
+                return render(request, 'pages/login.html', {'logged_in': True, 'user': request.user})
             else:
-                return render(request, 'pages/htmls/login.html', {'password_not_match': True})
+                return render(request, 'pages/login.html', {'password_not_match': True})
         else:
-            return render(request, 'pages/htmls/login.html', {'user_not_exists': True})
+            return render(request, 'pages/login.html', {'user_not_exists': True})
     else:
-        return render(request, 'pages/htmls/login.html')
+        return render(request, 'pages/login.html')
 
 @login_required(login_url='login')
 def logout(request):
