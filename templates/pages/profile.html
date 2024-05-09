@@ -1,12 +1,37 @@
 {%extends 'base.html'%}
 {%block content%}
+{% if messages %}
+<script type="text/javascript">
+    {% for message in messages %}
+    alert("{{ message }}");
+    {% endfor %}
+</script>
+{% endif %}
+<script type="text/javascript">
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete your account? This action cannot be undone.');
+    }
+</script>
 
 
 
   <div class="profile_setting_container">
 <div class="profile_setting_wrapper">
       <h2>Profile Settings</h2>
+      {% if profile.image %}
+                <img src="{{ profile.image.url }}" alt="Profile Picture" height= "200">
+      {% endif %}
 <div class="profile_setting1">
+    <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Existing form fields -->
+        <div class="form-group">
+            <label for="image">Profile Picture:</label>
+            <input type="file" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary" name="btnUpdateProfile">Update Profile</button>
+    </form>
+    
     <form method="POST" action="{% url 'profile' %}">
         {% csrf_token %}
         <input class="profile_input" type="text" name="UsernameField" class="text-1" required placeholder="Username: {{user.username}}" onkeypress="return event.charCode !== 32" readonly>
@@ -59,6 +84,11 @@
 
 
     </form>
+    <form method="POST" action="{% url 'profile' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" name="btnDeleteAccount" onclick="return confirmDelete()">Delete Account</button>
+    </form>
+    
 </div> 
 </div>
 </div>
@@ -111,10 +141,6 @@
         {% endfor %}
     </div>
 {% endif %}
-<form method="POST" action="{% url 'profile' %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger" name="btnDeleteAccount">Delete Account</button>
-</form>
 
 
     

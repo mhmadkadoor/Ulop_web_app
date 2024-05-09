@@ -15,3 +15,6 @@ urlpatterns = [
     path('comment/edit/<int:comment_id>/', views.edit_comment, name='edit_comment_page'),
     path('comment/delete/<int:comment_id>/', views.delete_comment, name='delete_comment'),
 ]
+
+handler404 = 'pages.views.custom_page_not_found_view'
+handler500 = 'pages.views.custom_error_view'

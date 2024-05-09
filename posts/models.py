@@ -40,7 +40,7 @@ class Post(models.Model):
             if os.path.isfile(pdf_path):
                 os.remove(pdf_path)
 
-        super().delete(*args, **kwargs)  # Call the "real" delete() method.
+        super().delete(*args, **kwargs)
 
     class Meta:
         verbose_name = "All Post"
