@@ -5,7 +5,7 @@
 
 {% for post in posts %}
         {% if  post.sender_id == page.id %}
-
+            {% if post.active %}
            <div class="wrapper">
                 <div class=photos>
                     <h3 >{{ post.title }}</h3>
@@ -21,7 +21,7 @@
                     <a href="{% url 'view_post' post.id %}" class="btn btn-primary">go to the post</a>
                 </div>
             </div>
-    
+            {% endif %}
         {% endif %}
     {% endfor %}
 

@@ -4,12 +4,13 @@
 <head>
     {% if user.is_authenticated and thisPage == "profile" %}
     <title>Profile:{{user.username}}</title>
+    <link rel="stylesheet" href="{% static 'css\pages\profile.css' %}">
     {% endif %}
     <link rel="stylesheet" href="{% static 'css\style.css' %}">
     <link rel="stylesheet" href="{% static 'css\404.css' %}">
     <link rel="stylesheet" href="{% static 'css\500.css' %}">
     <!-- pages -->
-    <link rel="stylesheet" href="{% static 'css\pages\profile.css' %}">
+    
     <link rel="stylesheet" href="{% static 'css\pages\view_profile.css' %}">
     <link rel="stylesheet" href="{% static 'css\pages\about.css' %}">
     <link rel="stylesheet" href="{% static 'css\pages\home.css' %}">
