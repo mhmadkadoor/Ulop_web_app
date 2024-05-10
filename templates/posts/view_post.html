@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% if post.active %}
 <div class="wrapper">
     <div class=photos>
         <h3 >{{ post.title }}</h3>
@@ -17,4 +18,5 @@
         {% include 'comments/comments.html' %}
     </div>
 </div>
+{% endif %}
 {% endblock %}
