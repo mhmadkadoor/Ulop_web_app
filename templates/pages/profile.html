@@ -18,8 +18,8 @@
   <div class="profile_setting_container">
 <div class="profile_setting_wrapper">
       <h2>Profile Settings</h2>
-      {% if profile.image %}
-                <img src="{{ profile.image.url }}" alt="Profile Picture" height= "200">
+      {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="Profile Picture" height= "200">
       {% endif %}
 <div class="profile_setting1">
     <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
@@ -113,7 +113,8 @@
                     <h3 >{{ post.title }}</h3>
                     <p>{{ post.content }}</p>
                     <p>Posted date:{{ post.date_posted }}</p>
-                    <p>sender: {{ post.sender_name }}</p>
+                    <a href="{% url 'view_profile' post.sender_id %}">
+                    <p><img src="{{ post.owner.profile.image.url }}" alt="Comment Image">sender: {{ post.sender_name }}</p></a>
                     {% if post.image %}
                         <img src="{{ post.image.url }}" alt="Post Image">
                     {% endif %}

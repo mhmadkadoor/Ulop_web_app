@@ -458,11 +458,14 @@ p {
   background-color: #1da0b7;
   box-shadow: 1px 2px 20px 4px rgba(0, 0, 0, 0.4);
 }
-.photos .posted_sender {
+.photos .posted_sender img {
   position: absolute;
   bottom: 25px;
   color: gray;
   font-weight: bold;
+  height: 50px;
+  width: auto;
+  border-radius: 50%;
 }
 .photos .posted_date {
   position: absolute;
@@ -553,9 +556,12 @@ form {
   font-weight: bold;
   outline: none;
 }
-.comment_user {
+.comment_user img {
   margin-top: 50px;
   color: #feda6a;
+  height: 50px;
+  width: auto;
+  border-radius: 50%;
 }
 .comment_content {
   color: #ffffff;

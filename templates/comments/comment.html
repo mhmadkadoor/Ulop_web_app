@@ -1,12 +1,15 @@
 
 {% if comment.post.id == post.id %}
     <div class="comment">  
+        
         <a href="{% url 'view_profile' comment.sender_id %}">
             
-        <h2 class="comment_user">{{ comment.sender_name }}</h2></a>
+        <h2 class="comment_user"><img src="{{ comment.owner.profile.image.url }}" alt="Comment Image">{{ comment.sender_name }}</h2></a>
         
         <h4 class="comment_content">{{ comment.content }}</h4>
+
         
+
         <h4 class="comment_date">{{ comment.date_posted }}</h4>
         {% include 'form/edit_comment_btn.html' %}
     </div>

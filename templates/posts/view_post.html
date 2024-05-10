@@ -6,7 +6,8 @@
         <h3 >{{ post.title }}</h3>
         <p>{{ post.content }}</p>
         <p>Posted date:{{ post.date_posted }}</p>
-        <p>{{ post.sender_name }}</p>
+        <a href="{% url 'view_profile' post.sender_id %}">
+        <p>{{ post.sender_name }}</p></a>
 
         {% if post.image %}
             <img  src="{{ post.image.url }}" alt="Post Image">
@@ -15,7 +16,7 @@
         {% if user.is_authenticated %}
                 {% include 'form/add_comment.html' %}
         {% endif %}
-        {% include 'comments/comments.html' %}
+        {% include 'comments/comments.html' %} 
     </div>
 </div>
 {% endif %}

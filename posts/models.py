@@ -49,6 +49,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1, verbose_name='owner')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     sender_id = models.IntegerField(default=1, verbose_name='sender id')
     sender_name = models.CharField(max_length=100, default='', verbose_name='sender name')

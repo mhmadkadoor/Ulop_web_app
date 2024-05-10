@@ -9,6 +9,19 @@
     <li><a href="{% url 'signup' %}">sign up</a></li>
     {% endif %}
 
+    {% if logged_in %}
+      {% if user.first_name and user.last_name %}
+      <p>Wellcome:{{ user.first_name }} {{ user.last_name }}</p>
+      {% else %}
+      <p>Wellcome:{{ user.username }}</p>
+      {% endif %}
+      <script>
+      setTimeout(function () {
+        window.location.href = "{% url 'home' %}";
+      }, 2000);
+      </script>
+    {% endif %}
+
     <input
       class="text-1"
       type="text"
@@ -27,18 +40,11 @@
       onkeypress="return event.charCode !== 32"
     />
     <br/>
-    {% if user.is_authenticated %}
-    <p>You logged in as {{user.username}}</p>
-    {% endif %} {% if password_not_match %}
+    {% if password_not_match %}
     <p>Password is not correct</p>
-    {% endif %} {% if logged_in %}
-    <script>
-      setTimeout(function () {
-        window.location.href = "{% url 'home' %}";
-      }, 2000);
-    </script>
-    {% endif %}
+    {% endif %} 
     <input class="btn" type="submit" value="Login" />
   </form>
+  
 </div>
 {% endblock %}
