@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>{{ profilo.first_name }} {{ profilo.last_name }}</p>
+{% if profilo.profile.image %}
+                <img src="{{ profilo.profile.image.url }}" alt="Profile Picture" height= "200">
+      {% endif %}
+
+
+
+{% for post in posts %}
+        {% if  post.sender_id == profilo.id %}
+            {% if post.active %}
+           <div class="wrapper">
+                <div class=photos>
+                    <h3 >{{ post.title }}</h3>
+                    <p>{{ post.content }}</p>
+                    <p>Posted date:{{ post.date_posted }}</p>
+                    <a href="{% url 'view_profile' post.sender_id %}">
+                    <p><img src="{{ post.owner.profile.image.url }}" alt="Comment Image">sender: {{ post.sender_name }}</p></a>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="Post Image">
+                    {% endif %}
+                    {% if post.pdf %}
+                        <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn btn-primary">Download PDF</a>
+                    {% endif %}
+                    <a href="{% url 'view_post' post.id %}" class="btn btn-primary">go to the post</a>
+                </div>
+            </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+
+{% endblock %}

@@ -4,18 +4,25 @@ from django.db import transaction
 from django.contrib.auth.models import User , auth
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Profile
+from django.http import HttpResponseNotFound
 import os
 # Create your views here.
 
 def view_post(request, post_id):
     comments = Comment.objects.all()
     current_post = Post.objects.get(id=post_id)
-    return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments})
+    current_user = request.user
+
+    return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments, "thisPage": 'view_post'})
 
 @transaction.atomic
 def edit_post(request, post_id):
     current_post = Post.objects.get(id=post_id)
+    current_user = request.user
+
     
     if request.method == 'POST':
         if 'btnPostEdite' in request.POST:
@@ -55,13 +62,14 @@ def edit_post(request, post_id):
             return redirect('profile')  # Assuming you have a 'profile' named URL pattern
 
     else:
-        return render(request, 'posts/edit_post.html', {'post': current_post})
+        return render(request, 'posts/edit_post.html', {'post': current_post,})
 
 
 
 
 def home(request):
     current_user = request.user
+
     comments = Comment.objects.all()
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -85,29 +93,32 @@ def home(request):
             if pdf:
                 post.pdf = pdf
             post.save()
-            print('Post saved')
 
-        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
+        return render(request, 'pages/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments , 'thisPage': 'home'})
     else:
-        return render(request, 'pages/htmls/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments})
+        return render(request, 'pages/home.html', {'posts': Post.objects.all(), 'user': current_user, 'comments': comments, 'thisPage': 'home'})
 
 def about (request):
-    return render(request, 'pages/htmls/about.html')
+    current_user = request.user
 
+    return render(request, 'pages/about.html',{ 'thisPage': 'about'})
 
+@transaction.atomic
 @login_required(login_url='login')
 def profile (request):
+    profileReturn = Profile.objects.get_or_create(user=request.user)[0]
     current_user = request.user
+
     if request.method == 'POST':
         if 'btnMailChange' in request.POST:
             if str(request.POST.get('NewMail')) == 'None':
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'None_input': True})
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'None_input': True, 'thisPage': 'profile'})
             elif str(request.POST.get('NewMail')) == current_user.email:
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_exists': True})
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_exists': True, 'thisPage': 'profile'})
             else:
                 current_user.email = request.POST.get('NewMail')
                 current_user.save()
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_changed': True})
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'email_changed': True, 'thisPage': 'profile'})
         elif 'btnPassChange' in request.POST:
             password = request.POST.get('current_password')
             password1 = request.POST.get('new_password1')
@@ -118,17 +129,41 @@ def profile (request):
                     current_user.save()
                     user = authenticate(request, username=current_user.username, password=password1)
                     auth.login(request, user)
-                    return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_changed': True})
+                    return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_changed': True, 'thisPage': 'profile'})
                 else:
-                    return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'passwords_not_match': True})
+                    return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user, 'passwords_not_match': True, 'thisPage': 'profile'})
             else:
-                return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True})
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True, 'thisPage': 'profile'})
         elif 'btnDeleteAccount' in request.POST:
             current_user.delete()
             return redirect('home')
+        elif 'btnUpdateProfile' in request.POST:
+            # Handle profile update logic
+            if 'image' in request.FILES:
+                # Get the current profile
+                profile = Profile.objects.get(user=current_user)
+                # Check if the user already has a profile picture
+                if profile.image and profile.image != 'profile_pics/male_def.jpg':
+                    # Delete the old profile picture
+                    profile.image.delete()
+                # Save the new profile picture
+                profile.image = request.FILES['image']
+                profile.save()
+                messages.success(request, 'Profile picture updated successfully.')
+            else:
+                messages.error(request, 'No image selected for upload.')
+            return redirect('profile')
         
-    return render(request, 'pages/htmls/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all()})
+    return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'thisPage': 'profile'})
 
+
+
+def view_profile(request, user_id):
+    current_user = request.user
+
+    return render(request, 'pages/view_profile.html', {'user': current_user, 'posts': Post.objects.all(), 'profilo': User.objects.get(id=user_id),})
+
+@transaction.atomic
 def sign(request):
     if request.method == 'POST':
         username = str(request.POST.get('username'))
@@ -138,7 +173,7 @@ def sign(request):
         last_name = str(request.POST.get('last_name'))
         email = str(request.POST.get('email'))
         if str(password) != str(confirm_password):
-            return render(request, 'pages/htmls/sign.html', {'passwords_not_match': True, 'user_already_exists': False,'account_created': False})
+            return render(request, 'pages/sign.html', {'passwords_not_match': True, 'user_already_exists': False,'account_created': False, "thisPage": 'sign'})
         else:
             users_list = User.objects.all()
             for i in range(len(users_list)):
@@ -151,15 +186,19 @@ def sign(request):
     
             if user_already_exist:
             # Return user_already_exist as true
-                return render(request, 'pages/htmls/sign.html', {'passwords_not_match': False,'user_already_exists': True,'account_created': False})
+                return render(request, 'pages/sign.html', {'passwords_not_match': False,'user_already_exists': True,'account_created': False, "thisPage": 'sign'})
             else:
                 user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name, email=email)
+                userProfile = Profile(user=user)
                 user.save()
-                return render(request, 'pages/htmls/sign.html', {'passwords_not_match': False,'user_already_exists': False ,'account_created': True})
+                userProfile.save()
+                return render(request, 'pages/sign.html', {'passwords_not_match': False,'user_already_exists': False ,'account_created': True, "thisPage": 'sign'})
     else:  
-        return render(request, 'pages/htmls/sign.html', {'passwords_not_match': False,'user_already_exists': False,'account_created': False })
+        return render(request, 'pages/sign.html', {'passwords_not_match': False,'user_already_exists': False,'account_created': False, "thisPage": 'sign' })
 
 def login(request):
+    current_user = request.user
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -177,13 +216,13 @@ def login(request):
             if user_1.check_password(password):
                 user = authenticate(request, username=username, password=password)
                 auth.login(request, user)
-                return render(request, 'pages/htmls/login.html', {'logged_in': True, 'user': request.user})
+                return render(request, 'pages/login.html', {'logged_in': True, 'user': current_user, "thisPage": 'login'})
             else:
-                return render(request, 'pages/htmls/login.html', {'password_not_match': True})
+                return render(request, 'pages/login.html', {'password_not_match': True, "thisPage": 'login'})
         else:
-            return render(request, 'pages/htmls/login.html', {'user_not_exists': True})
+            return render(request, 'pages/login.html', {'user_not_exists': True, "thisPage": 'login'})
     else:
-        return render(request, 'pages/htmls/login.html')
+        return render(request, 'pages/login.html',{ "thisPage": 'login'})
 
 @login_required(login_url='login')
 def logout(request):
@@ -207,10 +246,10 @@ def add_comment(request, post_id):
         else:
             sender_name = f"{current_user.first_name} {current_user.last_name}"
 
-        is_unique_comment = not Comment.objects.filter(content=content, sender_id=sender_id, post=current_post).exists()
+        is_unique_comment = not Comment.objects.filter(content=content, sender_id=sender_id, post=current_post, owner=current_user).exists()
 
         if is_unique_comment:
-            Comment.objects.create(post=current_post, content=content, sender_id=sender_id, sender_name=sender_name)
+            Comment.objects.create(post=current_post, content=content, sender_id=sender_id, sender_name=sender_name, owner=current_user)
 
         return redirect('view_post', post_id=post_id)  
     else:
@@ -223,12 +262,15 @@ def delete_comment(request, comment_id):
     return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
 
 def edit_comment(request, comment_id):
+    current_user = request.user
+
     comments = Comment.objects.all()
     comment = Comment.objects.get(id=comment_id)
     post = comment.post
     if request.method == 'POST':
         content = str(request.POST.get('comment_content'))
         comment.content = content
+        comment.owner = current_user
         is_unique_comment = True
         for existing_comment in comments:
             if (existing_comment.content == content) and (existing_comment.sender_id == comment.sender_id) and (existing_comment.post == post):
@@ -236,6 +278,12 @@ def edit_comment(request, comment_id):
                 break
         if is_unique_comment:
             comment.save()
-        return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
+        return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all(),})
     else:
-        return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': request.user })
+        return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': current_user ,})
+    
+def custom_page_not_found_view(request, exception):
+    return render(request, '404.html')
+
+def custom_error_view(request):
+    return render(request, '500.html')

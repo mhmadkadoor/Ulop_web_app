@@ -2,31 +2,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-   
-    <link rel="stylesheet" href="{% static 'css\style.css' %}">
-    <!-- pages -->
+    
+    <link rel="icon" href="{% static 'css/Fethi.png' %}" type= "image/jpg"/>
+
+    {% if user.is_authenticated and thisPage == "profile" %}
+    <title>Profile:{{user.username}}</title>
     <link rel="stylesheet" href="{% static 'css\pages\profile.css' %}">
-    <link rel="stylesheet" href="{% static 'css\pages\about.css' %}">
+    {% elif thisPage == "home" %}
     <link rel="stylesheet" href="{% static 'css\pages\home.css' %}">
-    <link rel="stylesheet" href="{% static 'css\pages\login.css' %}">
-    <link rel="stylesheet" href="{% static 'css\pages\sign.css' %}">
-    <link rel="stylesheet" href="{% static 'css\pages\nav_bar.css' %}">
-    <!-- posts -->
     <link rel="stylesheet" href="{% static 'css\posts\post.css' %}">
     <link rel="stylesheet" href="{% static 'css\posts\posts.css' %}">
-    <link rel="stylesheet" href="{% static 'css\posts\edit_post.css' %}">
-    <link rel="stylesheet" href="{% static 'css\posts\edit_comment.css' %}">
-    <link rel="stylesheet" href="{% static 'css\posts\view_post.css' %}">
-    <!-- form -->
-    <link rel="stylesheet" href="{% static 'css\form\add_comment.css' %}">
-    <link rel="stylesheet" href="{% static 'css\form\edit_comment.css' %}">
-    <link rel="stylesheet" href="{% static 'css\form\edit_comment_form.css' %}">
-    <link rel="stylesheet" href="{% static 'css\form\edit_comment_btn.css' %}">
-    <!-- comments -->
-    <link rel="stylesheet" href="{% static 'css\comments\comment.css' %}">
-    <link rel="stylesheet" href="{% static 'css\comments\comments.css' %}">
     <link rel="stylesheet" href="{% static 'css\comments\commentsLimited.css' %}">
-   
+    <link rel="stylesheet" href="{% static 'css\comments\comment.css' %}">
+    <link rel="stylesheet" href="{% static 'css\form\add_comment.css' %}">
+    <link rel="stylesheet" href="{% static 'css\form\edit_comment_btn.css' %}">
+    {% elif thisPage == "about" %}
+    <link rel="stylesheet" href="{% static 'css\pages\about.css' %}">
+    {% elif thisPage == "sign" %}
+    <link rel="stylesheet" href="{% static 'css\pages\sign.css' %}">
+    {% elif thisPage == "login" %}
+    <link rel="stylesheet" href="{% static 'css\pages\login.css' %}">
+    {% elif thisPage == "view_post" %}
+    <link rel="stylesheet" href="{% static 'css\form\add_comment.css' %}">
+    <link rel="stylesheet" href="{% static 'css\comments\comments.css' %}">
+    <link rel="stylesheet" href="{% static 'css\comments\comment.css' %}">
+    <link rel="stylesheet" href="{% static 'css\form\edit_comment_btn.css' %}">
+    {% elif thisPage == "view_profile" %}
+    <link rel="stylesheet" href="{% static 'css\pages\view_profile.css' %}">
+    {% elif thisPage == "edit_comment" %}
+    <link rel="stylesheet" href="{% static 'css\form\edit_comment.css' %}">
+    {% elif thisPage == "edit_post" %}
+    <link rel="stylesheet" href="{% static 'css\posts\edit_post.css' %}">
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css\style.css' %}">
+    <link rel="stylesheet" href="{% static 'css\404.css' %}">
+    <link rel="stylesheet" href="{% static 'css\500.css' %}">
 
 
 
@@ -34,7 +44,6 @@
     
     
     <title>UOLP | CHAT</title>
-    <link rel="icon" href="{% static 'instagram-icon.png' %}" />
    
 </head> 
 

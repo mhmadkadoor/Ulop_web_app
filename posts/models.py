@@ -40,7 +40,7 @@ class Post(models.Model):
             if os.path.isfile(pdf_path):
                 os.remove(pdf_path)
 
-        super().delete(*args, **kwargs)  # Call the "real" delete() method.
+        super().delete(*args, **kwargs)
 
     class Meta:
         verbose_name = "All Post"
@@ -49,6 +49,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1, verbose_name='owner')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     sender_id = models.IntegerField(default=1, verbose_name='sender id')
     sender_name = models.CharField(max_length=100, default='', verbose_name='sender name')
