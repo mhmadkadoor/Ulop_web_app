@@ -7,7 +7,7 @@
         <p>{{ post.content }}</p>
         <p>Posted date:{{ post.date_posted }}</p>
         <a href="{% url 'view_profile' post.sender_id %}">
-        <p>{{ post.sender_name }}</p></a>
+        <p><p class="posted_sender"><img src="{{ post.owner.profile.image.url }}" alt="Comment Image">{{ post.sender_name }}</p></a>{{ post.sender_name }}</p></a>
 
         {% if post.image %}
             <img  src="{{ post.image.url }}" alt="Post Image">
