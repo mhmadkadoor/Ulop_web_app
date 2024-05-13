@@ -1,52 +1,61 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-
-    {% if user.is_authenticated %}
-    <div class="wrapper-post">
-        <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div><h1>Posts</h1></div>
-            <div class="post-t">
-                <input type="text" name="title" required placeholder="Title">
-            </div>
-            <div class="post-c">
-                <textarea class="inside-post-c" name="content" required placeholder="Write your post..."></textarea>
-            </div>
-            <div class="post_flex">
-                <div class="file-input-wrapper">
-                    <input type="file" name="image" accept="image/*">
-                    <label for="image" class="file-input-button">Choose Image</label>
-                </div>
-                <div class="file-input-wrapper">
-                    <input type="file" name="pdf" accept=".pdf">
-                    <label for="pdf" class="file-input-button">Choose PDF</label>
-                </div>
-                <div class="post-pub-pri">
-                    <select name="visibility">
-                        <option value="public">Public</option>
-                        <option value="private">Private</option>
-                    </select>
-                </div>
-                <div class="post-category">
-                    <select name="category" required placeholder="category">
-                        <option value="News">News</option>
-                        <option value="Question">Question</option>
-                        <option value="Event">Event</option>
-                        <option value="Tips">Tips</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <button class="post-btn" type="submit" class="btn btn-primary">Post</button>
-            </div>
-        </form>
+{% extends 'base.html' %} {% block content %} {% if user.is_authenticated %}
+<div class="wrapper_share_post">
+  <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div><h1>Posts</h1></div>
+    <div class="share_post_title_content">
+      <input
+        class="title"
+        type="text"
+        name="title"
+        required
+        placeholder="Title"
+      />
+      <textarea
+        class="content"
+        name="content"
+        required
+        placeholder="Write your post..."
+      ></textarea>
     </div>
-    
-    {% endif %}
+    <div class="share_image_pdf">
+      <input
+        type="file"
+        name="image"
+        accept="image/*"
+        id="image-input"
+        class="file-input"
+      />
+      <label for="image-input" class="file-input-button">Choose Img</label>
 
+      <input
+        type="file"
+        name="pdf"
+        accept=".pdf"
+        id="pdf-input"
+        class="file-input"
+      />
+      <label for="pdf-input" class="file-input-button">Choose PDF</label>
+    </div>
+    <div class="post_public_catregory">
+      <div class="post_public_private">
+        <select name="visibility">
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+      </div>
+      <div class="post_category">
+        <select name="category" required placeholder="category">
+          <option value="News">News</option>
+          <option value="Question">Question</option>
+          <option value="Event">Event</option>
+          <option value="Tips">Tips</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+    <button class="post-btn" type="submit">Post</button>
+  </form>
+</div>
 
-    {% include "posts/posts.html" %}
-
-
-{% endblock content %}
+{% endif %} {% include "posts/posts.html" %} {% endblock content %}

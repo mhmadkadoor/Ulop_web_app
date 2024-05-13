@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="wrapper">
-    <div class=photos>
+<div class="container_post go">
+<div class="wrapper_post go">
+    
         <h3 >{{ post.title }}</h3>
-        <p>{{ post.content }}</p>
-        <p>Posted date:{{ post.date_posted }}</p>
-        <p>{{ post.sender_name }}</p>
-
-        {% if post.image %}
+        <div class="posted_paragraph_image">
+            {% if post.image %}
             <img  src="{{ post.image.url }}" alt="Post Image">
-        {% endif %}
-
+            {% endif %}
+            <p>{{ post.content }}</p>
+        </div>
+        <div class = "category_author_date_post">
+            <p class="category">Category : {{ post.get_category_display }}</p>
+            <p class="sender">Author     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.sender_name }}</p>
+            <p class="date">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.date_posted }}</p>
+        </div>
+        
         {% if user.is_authenticated %}
                 {% include 'form/add_comment.html' %}
         {% endif %}
         {% include 'comments/comments.html' %}
-    </div>
+        
+    
+</div>
 </div>
 {% endblock %}

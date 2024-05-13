@@ -2,7 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Madimi+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Madimi+One&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
-* {
+
+*{
+  margin:0;
+  box-sizing: border-box;
+}
+/* * {
   margin: 0;
 }
 body {
@@ -67,9 +72,9 @@ body {
   color: white;
 
   font-family: "Chakra Petch", sans-serif;
-}
+} */
 /*post start(home.html)*/
-.wrapper-post form h1 {
+/* .wrapper-post form h1 {
   margin-top: 10px;
   color: rgb(0, 0, 0);
   font-family: "Roboto Mono", monospace;
@@ -105,38 +110,39 @@ body {
   border: none;
   overflow: hidden;
   color: #007bff;
-}
+} */
 /* Style select elements within containers with class .post-pub-pri */
-.post-pub-pri select,
+/* .post-pub-pri select,
 .other-container select {
-  /* Styling the appearance of the select element */
-  appearance: none; /* Removes default appearance (arrow) */
-  -webkit-appearance: none; /* For older versions of webkit browsers */
-  -moz-appearance: none; /* For older versions of Firefox */
-  background-color: #f0f0f0; /* Background color */
-  border: 1px solid #ccc; /* Border */
-  padding: 10px 20px; /* Padding */
-  border-radius: 5px; /* Border radius */
-  width: 200px; /* Width */
-  font-size: 16px; /* Font size */
-  color: #333; /* Text color */
-}
+
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  background-color: #f0f0f0; 
+  border: 1px solid #ccc; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  width: 200px; 
+  font-size: 16px; 
+  color: #333;
+} */
 
 /* Style the select elements when hovered */
-.post-pub-pri select:hover,
+
+/* .post-pub-pri select:hover,
 .other-container select:hover {
-  border-color: #999; /* Border color on hover */
-}
+  border-color: #999; 
+} */
 
 /* Style the select elements when focused */
-.post-pub-pri select:focus,
+/* .post-pub-pri select:focus,
 .other-container select:focus {
-  outline: none; /* Remove outline */
-  border-color: #007bff; /* Border color when focused */
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3); /* Add a subtle shadow */
-}
+  outline: none; 
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+} */
 /* Style select element within the post-category container */
-.post-category select {
+/* .post-category select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -147,40 +153,40 @@ body {
   width: 200px;
   font-size: 16px;
   color: #495057;
-}
+} */
 
 /* Style the select element when hovered */
-.post-category select:hover {
-  border-color: #adb5bd; /* Border color on hover */
-}
+/* .post-category select:hover {
+  border-color: #adb5bd; 
+} */
 
 /* Style the select element when focused */
-.post-category select:focus {
-  outline: none; /* Remove outline */
-  border-color: #007bff; /* Border color when focused */
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3); /* Add a subtle shadow */
-}
+/* .post-category select:focus {
+  outline: none;
+  border-color: #007bff; 
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3); 
+} */
 /* Style the post button */
-.post-btn {
-  background-color: #007bff; /* Background color */
-  color: #fff; /* Text color */
-  padding: 10px 20px; /* Padding */
-  border: none; /* Border */
-  border-radius: 5px; /* Border radius */
-  font-size: 16px; /* Font size */
-  cursor: pointer; /* Cursor style */
-  transition: background-color 0.3s ease; /* Smooth transition for background color */
-}
+/* .post-btn {
+  background-color: #007bff;
+  color: #fff; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 16px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+} */
 
 /* Hover effect for the post button */
-.post-btn:hover {
-  background-color: #0056b3; /* Background color on hover */
-}
+/* .post-btn:hover {
+  background-color: #0056b3;
+} */
 
 /* Focus effect for the post button */
-.post-btn:focus {
-  outline: none; /* Remove outline */
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3); /* Add a subtle shadow when focused */
+/* .post-btn:focus {
+  outline: none; 
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
 }
 .post_flex {
   display: flex;
@@ -192,7 +198,7 @@ body {
   position: relative;
   overflow: hidden;
   display: inline-block;
-  background-color: #ffa849; /* Change background color */
+  background-color: #ffa849; 
   padding: 10px;
   border-radius: 5px;
 }
@@ -214,23 +220,23 @@ body {
   cursor: pointer;
   border-radius: 5px;
   font-family: "Roboto Mono", monospace;
-}
+} */
 
 /* Style the file input button when hovered */
-.file-input-button:hover {
+/* .file-input-button:hover {
   background: #0056b3;
 }
 
-/* Style the file input button when focused */
+
 .file-input-button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
-}
+} */
 
 /*post end(home.html)*/
 
 /*profile setting start (profile.html)*/
-.profile_setting_container {
+/* .profile_setting_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -302,15 +308,15 @@ body {
 
 .profile_setting2 h3 {
   color: #23425f;
-}
+} */
 
 /*profile setting end (profile.html)*/
 /*profile setting user id and name*/
-.grid-container {
+/* .grid-container {
   font-family: "Roboto Mono", monospace;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px; /* Adjust gap between grid items */
+  gap: 10px;
   margin-top: 100px;
   margin-bottom: 50px;
 }
@@ -321,12 +327,12 @@ body {
   border: 1px solid #999;
   border-radius: 5px;
   text-align: center;
-}
+} */
 
 /*profile setting user id and name end*/
 
 /*nav bar start*/
-nav {
+/* nav {
   overflow: hidden;
   background-color: #333;
   position: fixed;
@@ -377,16 +383,16 @@ nav ul li a:hover {
 }
 nav ul li a i {
   margin-left: 5px;
-}
+} */
 /*nav bar end*/
 
-p {
+/* p {
   margin-top: 50px;
-}
+} */
 
 /* POSTS START */
 
-.wrapper {
+/* .wrapper {
   display: inline-flex;
 }
 .photos {
@@ -425,8 +431,7 @@ p {
 .photos .posted_p_i .post_content {
   color: #ffffff;
   word-wrap: break-word;
-  /* Remove position: absolute; */
-  width: 100%; /* Ensure it takes full width */
+  width: 100%; 
 }
 .photos img {
   height: 200px;
@@ -469,10 +474,10 @@ p {
   color: gray;
   bottom: 10px;
   font-size: 12px;
-}
+} */
 
 /* POSTS END */
-.labels {
+/* .labels {
   display: flex;
   background-position: center;
   background-size: cover;
@@ -525,16 +530,16 @@ p {
   background-color: #000000;
   color: #ffffff;
   border: 2px solid #ffffff;
-}
+} */
 
 /*edit post start*/
-form {
+/* form {
   margin-top: 50px;
-}
+} */
 /*edit post end*/
 
 /*comment*/
-.comment_btn {
+/* .comment_btn {
   background-color: #feda6a;
   font-family: "Roboto Mono", monospace;
   border: none;
@@ -583,6 +588,6 @@ form {
 }
 .comment_btn_delete_edit a:hover {
   color: #000000;
-}
+} */
 
 /*comment end*/

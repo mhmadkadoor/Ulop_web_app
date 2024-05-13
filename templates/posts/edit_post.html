@@ -2,30 +2,41 @@
 
 {% block content %}
 {% if user.id == post.sender_id or user.is_superuser %}
+<div class="wrapper_share_post">
 <form method="POST" action="{% url 'edit_post' post.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     <div><h1>Post</h1></div>
-    <div class="post-t">
-        <input type="text" name="title" required value={{post.title}}>
+    <div class="share_post_title_content">
+        <input class="title" type="text" name="title" required value={{post.title}}>
+        <textarea class="content" name="content" required>{{ post.content }}</textarea>
     </div>
-    <div class="post-c">
-        <textarea class="inside-post-c" name="content" required>{{ post.content }}</textarea>
-    </div>    
-    image
-    <div class="file-input-wrapper">
-        <input type="file" name="image" accept="image/*" >
-    </div>
-    pdf
-    <div class="file-input-wrapper">
-        <input type="file" name="pdf" accept=".pdf" >
-    </div>
-    <div class="post-pub-pri">
+    <div class="share_image_pdf">
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          id="image-input"
+          class="file-input"
+        />
+        <label for="image-input" class="file-input-button">Choose Img</label>
+  
+        <input
+          type="file"
+          name="pdf"
+          accept=".pdf"
+          id="pdf-input"
+          class="file-input"
+        />
+        <label for="pdf-input" class="file-input-button">Choose PDF</label>
+      </div>
+    <div class="post_public_catregory">
+        <div class="post_public_private">
         <select name="visibility" required value=>
             <option value="public">Public</option>
             <option value="private">Private</option>
         </select>
-    </div>
-    <div class="post-category">
+        </div>
+        <div class="post_category">
         <select name="catagory" required placeholder="catagory">
             <option value="News">News</option>
             <option value="Question">Question</option>
@@ -33,8 +44,9 @@
             <option value="Tips">Tips</option>
             <option value="Other">Other</option>
         </select>
+        </div>
     </div>
-    <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostEdite'>Post</button>
+    <button class="post-btn"  type="submit" name='btnPostEdite'>Post</button>
 </form>
 <form method="POST" action="{% url 'edit_post' post.id %}">
     {% csrf_token %}
@@ -44,7 +56,7 @@
 <div> <h1 style="color: red;">403 Forbidden</h1>
     <p style="color: red;">You are not allowed to change the post.</p>
 </div>
-
+</div>
 <script>
     setTimeout(function() {
         window.location.href = "{% url 'view_post' post.id %}";

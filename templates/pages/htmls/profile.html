@@ -19,17 +19,18 @@
         {% else %}
         <h3>Add E-mail</h3>
         {% endif %}
-        {% if email_changed %}
-            <p>Email changed successfully</p>
-            {% elif email_exists %}
-                <p>Email already exists</p>
-            {% elif None_input %}
-                <p>Email Field empty</p>
-        {% endif %} 
+        
      
         <div class="form-group">
             <input  class="profile_input_enter"  type="text" name="NewMail" class="text-1" required placeholder="Enter the new mail:" onkeypress="return event.charCode !== 32">
         </div>
+        {% if email_changed %}
+            <p class="email_changed">&#10004; Email changed successfully </p>
+            {% elif email_exists %}
+                <p class="email_exists">&#x1F5D9; Email already exists !</p>
+            {% elif None_input %}
+                <p class="email_empty">&#x1F5D9; Email Field empty !</p>
+        {% endif %} 
         {% if user.email %}
         <button type="submit" class="btn" name="btnMailChange">Change your mail</button>
         {% else %}
@@ -53,7 +54,16 @@
         <div class="form-group">
             <input class="profile_input_enter" type="password" name="new_password2" class="text-1" required placeholder="New Password again" onkeypress="return event.charCode !== 32">
         </div>
+        {% if password_changed %}
+        <p class="password_changed">	&#10004; Password changed successfully</p>
 
+        {%elif passwords_not_match%}
+        <p class="password_doesnt_match">&#x1F5D9; Passwords do not match !</p>
+
+        {%elif password_incorrect%}
+        <p class="password_incorrect"> &#x1F5D9; Incorrect password !</p>
+
+    {% endif %}
         <button type="submit" class="btn btn-primary"name="btnPassChange">Change Password</button>
 
 
@@ -62,36 +72,35 @@
 </div> 
 </div>
 </div>
-    {% if password_changed %}
-        <p>Password changed successfully</p>
-
-        {%elif passwords_not_match%}
-        <p>Passwords do not match</p>
-
-        {%elif password_incorrect%}
-        <p>Incorrect password</p>
-
-    {% endif %}
+    
 
 
 
     {% for post in posts %}
         {% if  post.sender_id == user.id and not user.is_superuser %}
 
-           <div class="wrapper">
-                <div class=photos>
+           <div class="container_post">
+                <div class="wrapper_post">
                     <h3 >{{ post.title }}</h3>
-                    <p>{{ post.content }}</p>
-                    <p>Posted date:{{ post.date_posted }}</p>
-                    <p>sender: {{ post.sender_name }}</p>
-                    {% if post.image %}
+                    <div class="posted_paragraph_image">
+                        {% if post.image %}
                         <img src="{{ post.image.url }}" alt="Post Image">
                     {% endif %}
-                    {% if post.pdf %}
+                    <p>{{ post.content }}</p>
+                    <div class="btn_post_all">
+                        {% if post.pdf %}
                         <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn btn-primary">Download PDF</a>
                     {% endif %}
                     <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
                     <a href="{% url 'view_post' post.id %}" class="btn btn-primary">go to the post</a>
+                </div>
+            </div>
+            <div class = "category_author_date_post">
+                <p class="category">Category : {{ post.get_category_display }}</p>
+                <p class="sender">Author     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.sender_name }}</p>
+                <p class="date">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.date_posted }}</p>
+                </div> 
+                    
                 </div>
             </div>
     

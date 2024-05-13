@@ -1,11 +1,11 @@
 {% extends "base.html" %} {% block content %}
-<div class="labels">
+<div class="log_in">
   <form method="POST">
-    <h1>Log in</h1>
+    <h1 class="head">Log in</h1>
     {% csrf_token %}
 
     {% if user_not_exists %}
-    <p>This Account does not exist, Create Account?</p>
+    <p class="account_not_exists">&#x1F5D9; This Account does not exist, Create Account?</p>
     <li><a href="{% url 'signup' %}">sign up</a></li>
     {% endif %}
 
@@ -17,7 +17,7 @@
       placeholder="Username"
       onkeypress="return event.charCode !== 32"
     />
-    <br/>
+    
     <input
       class="text-1"
       type="password"
@@ -26,11 +26,11 @@
       placeholder="Password"
       onkeypress="return event.charCode !== 32"
     />
-    <br/>
+  
     {% if user.is_authenticated %}
-    <p>You logged in as {{user.username}}</p>
+    <p class="password_changed">&#10004; You logged in as {{user.username}}</p>
     {% endif %} {% if password_not_match %}
-    <p>Password is not correct</p>
+    <p class="password_incorrect">&#x1F5D9; Password is not correct !</p>
     {% endif %} {% if logged_in %}
     <script>
       setTimeout(function () {

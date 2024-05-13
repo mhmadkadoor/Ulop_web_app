@@ -1,0 +1,23 @@
+.comment_btn_delete_edit{
+  
+  text-align: right;
+  padding:0;
+}
+.comment_btn_delete_edit a{
+  font-size: 12px;
+  font-weight: bold;
+  color:rgb(0, 0, 0);
+  text-decoration: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  border:1px solid white;
+  border-radius: 10px 0px 10px 10px;
+  transition: ease 0.5s;
+ 
+}
+.comment_btn_delete_edit a:hover{
+  border:1px solid rgb(0, 0, 0);
+  border-radius: 0px 10px 10px 10px;
+  color:#df8543; 
+
+}

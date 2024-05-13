@@ -1,0 +1,21 @@
+.comment_container_homepage{
+  border:1px solid black;
+  text-align: left;
+  padding:5px 10px;
+  border-radius: 0px 10px 10px 10px;
+  margin-bottom: 5px;
+}
+.comment_container_homepage h2{
+ color:rgb(97, 97, 97);
+ font-size: 10px;
+
+ 
+}
+.comment_container_homepage p{
+  font-size: 10px;
+  font-weight: 400;
+}
+.comment_container_homepage .comment_date{
+  color:rgb(97, 97, 97);
+  font-size: 7px;
+}

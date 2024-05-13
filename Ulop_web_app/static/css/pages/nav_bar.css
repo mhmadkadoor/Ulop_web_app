@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.container_navbar{
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  height:auto;
+  background:#ecf6c7;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: rgba(37, 39, 89, 0.08) 0px 8px 8px 0;
+  
+  
+}
+.container_navbar nav{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top:20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  cursor: pointer;
+  
+}
+.container_navbar nav .logo{
+ transform: scale(1);
+ transition: ease 0.5s;
+}
+.container_navbar nav .logo:hover{
+  transform: scale(1.12);
+  color:#ffffff;
+}
+.container_navbar nav ul{
+  display: flex;
+  list-style: none;
+  column-gap: 30px;
+  margin-right: 20px;
+  
+}
+.container_navbar nav ul li{
+
+}
+
+.container_navbar nav ul li a {
+
+  position: relative;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  transition: transform 0.5s ease-in-out;
+  transition:ease 0.5s;
+  
+}
+.container_navbar nav ul li a:hover{
+  color: #f39308;
+  
+}
+
+.container_navbar nav ul li a::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(to right,#051c41,#051c41);
+  bottom: -2px;
+  border-radius: 100px;
+  transition: width 0.5s ease-in-out;
+}
+
+.container_navbar nav ul li a:hover::before {
+  width:100%;
+  
+  
+}
+
+.container_navbar nav ul li a i{
+  margin-left: 5px;
+  font-size: 20px;
+  color:#f39308; 
+}
+
+
+/* Your existing CSS code */
+.navbar-toggle {
+  display: none; /* Hide toggle button by default */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.bar {
+  display: block;
+  width: 30px; 
+  height: 3px; 
+  margin: 5px auto;
+  background-color: #000;
+  transition: background-color 0.3s; 
+}
+
+/* Style for when the button is clicked */
+.navbar-toggle.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.navbar-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media screen and (max-width: 700px) {
+  .container_navbar nav ul {
+      max-height: 0; /* Start with a height of 0 */
+      overflow: hidden; /* Hide overflowing content */
+      transition: max-height 0.3s ease-in-out; /* Add transition for smooth height animation */
+      background: #ecf6c7; /* Background color */
+      padding: 0; /* Remove default padding */
+      margin: 0; /* Remove default margin */
+      list-style: none; /* Remove default list styles */
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+  }
+
+  .navbar-toggle {
+      display: block;
+      position: relative;
+      z-index: 1;
+  }
+
+  .container_navbar nav ul.show {
+      max-height: 200px; /* Set to a height that accommodates the menu items */
+  }
+
+  .container_navbar nav ul li {
+      padding: 10px; /* Add padding to menu items */
+      transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition for smooth transform and opacity changes */
+      transform: translateY(-20px); /* Initial translation to create an upward effect */
+      opacity: 0; /* Initial opacity set to 0 */
+  }
+
+  .container_navbar nav ul.show li {
+      transform: translateY(0); /* Translate back to the original position */
+      opacity: 1; /* Set opacity to fully visible */
+  }
+
+  /* Add hover effect for menu items */
+  .container_navbar nav ul.show li:hover {
+      background-color: #a3c2ff; /* Change to desired hover color */
+      color: #fff; /* Change to desired text color on hover */
+  }
+}
+
