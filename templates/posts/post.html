@@ -26,7 +26,7 @@
       <div class = "category_author_date_post">
       <p class="category">Category : {{ post.get_category_display }}</p>
       <a href="{% url 'view_profile' post.sender_id %}">
-      <p class="sender"><img src="{{ post.owner.profile.image.url }}" alt="Comment Image">Author     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.sender_name }}</p></a>
+      <p class="sender"><img src="{{ post.owner.profile.image.url }}" height="50" alt="Comment Image">Author     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.sender_name }}</p></a>
       <p class="date">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.date_posted }}</p>
       </div>
       <div class = "post_comment"> 

@@ -1,0 +1,114 @@
+/*profile setting start (profile.html)*/
+ .profile_setting_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 100%;
+  height: auto;
+  font-family: "Roboto Mono", monospace;
+}
+.profile_setting_container h2 {
+  color: #23425f;
+  margin-top: 15px;
+  font-size: 35px;
+}
+.profile_setting_wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 200px;
+  border: 2px solid #787878;
+  text-align: center;
+  background-color: #feda6a;
+  padding: 20px 50px 60px 50px;
+  border-radius: 10px;
+  transform: scale(1);
+  transition: ease 0.5s;
+}
+.profile_setting_wrapper:hover {
+  transform: scale(1.05);
+  border: 2px solid #b2b2b2;
+}
+.profile_setting_wrapper .btn {
+  background-color: #23425f;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 5px;
+  margin-left: 100px;
+  margin-bottom: 30px;
+  transition: ease 0.5s;
+}
+.profile_setting_wrapper .btn:hover {
+  background-color: #dadada;
+  color: #23425f;
+  border: 1px solid #23425f;
+}
+.profile_setting_wrapper form .profile_input_enter {
+  padding: 5px 50px 5px 5px;
+  outline: none;
+  border-radius: 10px;
+  border: none;
+  margin-top: 5px;
+  background-color: #eaeaea;
+}
+
+.profile_setting1 form .profile_input {
+  display: flex;
+  outline: none;
+  background-color: #feda6a;
+  border: none;
+  font-size: 20px;
+}
+.profile_setting1 h3 {
+  color: #23425f;
+  margin-top: 20px;
+}
+
+.profile_setting2 h3 {
+  color: #23425f;
+} */
+
+/*profile setting end (profile.html)*/
+/*profile setting user id and name*/
+ .grid-container {
+  font-family: "Roboto Mono", monospace;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.user_container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  text-align: center;
+} 
+
+/*profile setting user id and name end*/
+.password_incorrect{
+  color: red;
+}
+.password_changed{
+  color:green;
+}
+.password_doesnt_match{
+  color: red;
+}
+.email_changed{
+  color:green;
+}
+.email_exists{
+  color: red;
+}
+.email_empty{
+  color: red;
+}
