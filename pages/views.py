@@ -62,7 +62,7 @@ def edit_post(request, post_id):
             return redirect('profile')  # Assuming you have a 'profile' named URL pattern
 
     else:
-        return render(request, 'posts/edit_post.html', {'post': current_post,})
+        return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})
 
 
 
