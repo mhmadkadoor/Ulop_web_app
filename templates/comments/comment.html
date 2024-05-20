@@ -2,9 +2,20 @@
 {% if comment.post.id == post.id %}
     <div class="comment_container_homepage">  
         
-        <a href="{% url 'view_profile' comment.sender_id %}">
+        
             
-        <h2 class="comment_user"><img src="{{ comment.owner.profile.image.url }}" height="30" alt="Comment Image">{{ comment.sender_name }}</h2></a>
+
+            <div class="ab">
+                <p class="sender">
+                  <div class="profile_post">
+                    <img src="{{ comment.owner.profile.image.url }}" height="30" alt="Comment Image">
+                  </div>
+                  &nbsp;<a href="{% url 'view_profile' comment.sender_id %}">{{ comment.sender_name }}</a>
+                </p>
+              </div>
+
+
+       
         
         <h4 class="comment_content">{{ comment.content }}</h4>
 

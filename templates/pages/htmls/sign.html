@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="sign_up" >
+<form method="POST" action="{% url 'signup' %}">
+    <h1 class="head">Sign Up</h1>
+    {% csrf_token %}
+    {% if user_already_exists %}
+        <p>Error: You already have an account.</p>
+    {% endif %}
+    
+        <input  class="sign_up_username"  type="text" name="username" required placeholder="Enter your username" onkeypress="return event.charCode !== 32">
+        <p>for more security add first and last name</p>
+        <div class ="sign_up_firstname_lastname">
+        <input  class="text-1"  type="text" name="first_name" required placeholder="Enter your first name">
+        <input  class="text-1"  type="text" name="last_name" required placeholder="Enter your last name">
+        </div>
+        <input  class="text-1"  type="email" name="email" required placeholder="Enter your email" onkeypress="return event.charCode !== 32">
+        <input  class="text-1"  type="password"  name="password" required placeholder ="Enter your password" onkeypress="return event.charCode !== 32">
+        <input  class="text-1" type="password" name="confirm_password" required placeholder ="Confirm your password" onkeypress="return event.charCode !== 32">
+     
+        {% if passwords_not_match %}
+            <p>Error: Passwords do not match.</p>
+        {% endif %}
+        {% if account_created %}
+        <p>Account created successfully.</p>
+        <script>
+            setTimeout(function() {
+                window.location.href = "{% url 'login' %}";
+            }, 2000);
+        </script>
+        {% endif %}
+
+       
+        <input class ="btn" type="submit" value="Sign Up">
+    </form>
+</div>
+{% endblock content %}

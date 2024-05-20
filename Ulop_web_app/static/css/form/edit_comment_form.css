@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.edit_comment_container{
+  height:500px;
+  display: flex;
+ 
+  justify-content: center;
+  align-items: center;
+  
+}
+.edit_comment{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.edit_comment label{
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+.edit_comment textarea{
+  min-height: 300px;
+  min-width: 500px;
+  outline: none;
+  border:none;
+  border-radius:30px;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+.edit_comment_container input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+ text-decoration: none;
+ color:rgb(255, 255, 255);
+ padding: 3px 100px;
+ border-radius:10px 0px 10px 10px;
+ background: #df8543; 
+ transition: 0.5s ease;
+ transform: scale(1);
+}
+.edit_comment_container input:hover{
+  transform: scale(1.1);
+  background: #f1f1b0;
+  color:#df8543; 
+  border:1px solid #df8543; 
+  border-radius:0px 10px 10px 10px;
+  font-weight: bold;
+  cursor:pointer;
+}
