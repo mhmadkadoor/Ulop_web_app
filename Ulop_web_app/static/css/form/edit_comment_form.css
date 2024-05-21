@@ -4,9 +4,9 @@
 .edit_comment_container{
   height:500px;
   display: flex;
- 
   justify-content: center;
   align-items: center;
+  font-family: "Poppins", sans-serif;
   
 }
 .edit_comment{
@@ -14,10 +14,10 @@
   align-items: center;
   flex-direction: column;
 }
-.edit_comment label{
-  font-family: "Poppins", sans-serif;
+.edit_comment_container .edit_comment h1{
+  color: #e37426;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 50px;
 }
 .edit_comment textarea{
   min-height: 300px;
@@ -33,10 +33,10 @@
   margin-top: 10px;
   margin-bottom: 10px;
  text-decoration: none;
- color:rgb(255, 255, 255);
+ color:rgb(249, 3, 3);
  padding: 3px 100px;
  border-radius:10px 0px 10px 10px;
- background: #df8543; 
+ background: #e2d4ca; 
  transition: 0.5s ease;
  transform: scale(1);
 }
@@ -44,7 +44,7 @@
   transform: scale(1.1);
   background: #f1f1b0;
   color:#df8543; 
-  border:1px solid #df8543; 
+  border:1px solid #000000; 
   border-radius:0px 10px 10px 10px;
   font-weight: bold;
   cursor:pointer;

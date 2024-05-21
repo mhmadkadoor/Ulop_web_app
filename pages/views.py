@@ -259,7 +259,7 @@ def delete_comment(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
     post = comment.post
     comment.delete()
-    return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
+    return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all(), 'thisPage': 'view_post'})
 
 def edit_comment(request, comment_id):
     current_user = request.user
@@ -278,9 +278,9 @@ def edit_comment(request, comment_id):
                 break
         if is_unique_comment:
             comment.save()
-        return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all(),})
+        return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all(), 'thisPage': 'view_post'})
     else:
-        return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': current_user ,})
+        return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': current_user , 'thisPage': 'edit_comment'})
     
 def custom_page_not_found_view(request, exception):
     return render(request, '404.html')
