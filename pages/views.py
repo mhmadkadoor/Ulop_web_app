@@ -135,6 +135,13 @@ def profile (request):
             else:
                 return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True, 'thisPage': 'profile'})
         elif 'btnDeleteAccount' in request.POST:
+            current_user_posts = Post.objects.filter(owner=current_user)
+            for post in current_user_posts:
+                post.delete()
+            current_user_profile = Profile.objects.get(user=current_user)
+            current_user_posts.delete()
+            if current_user_profile.image != 'profile_pics/male_def.jpg':
+                current_user_profile.delete()
             current_user.delete()
             return redirect('home')
         elif 'btnUpdateProfile' in request.POST:
