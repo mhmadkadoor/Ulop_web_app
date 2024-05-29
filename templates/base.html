@@ -9,8 +9,7 @@
     {% if user.is_authenticated and thisPage == "profile" %}
     <title>Profile:{{user.username}}</title>
     <link rel="stylesheet" href="{% static 'css\pages\profile.css' %}">
-    <link rel="stylesheet" href="{% static 'css\posts\post.css' %}">
-    
+    <link rel="stylesheet" href="{% static 'css\form\add_comment.css' %}">
     {% elif thisPage == "home" %}
     <link rel="stylesheet" href="{% static 'css\pages\home.css' %}">
     <link rel="stylesheet" href="{% static 'css\posts\post.css' %}">
@@ -35,6 +34,7 @@
     {% elif thisPage == "view_profile" %}
     <link rel="stylesheet" href="{% static 'css\posts\post.css' %}">
     <link rel="stylesheet" href="{% static 'css\pages\view_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css\form\add_comment.css' %}">
     {% elif thisPage == "edit_comment" %}
     <link rel="stylesheet" href="{% static 'css\form\add_comment.css' %}">
     <link rel="stylesheet" href="{% static 'css\comments\comments.css' %}">
@@ -45,13 +45,16 @@
     {% elif thisPage == "edit_post" %}
     <link rel="stylesheet" href="{% static 'css\pages\home.css' %}">
     <link rel="stylesheet" href="{% static 'css\posts\edit_post.css' %}">
+    
+    
     {% endif %}
     <link rel="stylesheet" href="{% static 'css\base.css' %}">
     <link rel="stylesheet" href="{% static 'css\nav_bar.css' %}">
-    <link rel="stylesheet" href="{% static 'css\404.css' %}">
-    <link rel="stylesheet" href="{% static 'css\500.css' %}">
     <link rel="stylesheet" href="{% static 'css\pages\view_profile.css' %}">
-    <link rel="stylesheet" href="{% static 'css\posts\post.css' %}">
+    
+    
+    
+    
     
     {% include "Navbar.html"%}
     

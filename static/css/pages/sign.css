@@ -26,9 +26,7 @@
 .sign_up .head{
   color : #df8543; 
 }
-.sign_up p{
-  color:#df8543;
-}
+
 .sign_up input{
   padding-left: 10px;
   margin-top: 20px;
@@ -70,4 +68,16 @@ border: 1px solid  #df8543;
   background-color:#df8543;
   border-radius: 0px 10px 10px 10px;
 
+}
+.sign_password_not_match{
+  color: #ff0000;
+}
+.sign_more_security{
+  color:rgb(255, 0, 0);
+}
+.sign_account_succesfull{
+  color:rgb(0, 255, 0);
+}
+.sign_already_has_account{
+  color: rgb(255, 0, 0);
 }

@@ -9,27 +9,25 @@
 </script>
 {% endif %}
 
-<script type="text/javascript">
-  function confirmDelete() {
-    return confirm("Are you sure you want to delete your account? This action cannot be undone.");
-  }
-</script>
-
 <div class="profile_setting_container">
   <div class="profile_setting_wrapper">
     <h2>Profile Settings</h2>
     {% if user.profile.image %}
-    <img src="{{ user.profile.image.url }}" alt="Profile Picture" height="200" />
+    <div class="profile_pic">
+    <img src="{{ user.profile.image.url }}" alt="Profile Picture"/>
+    </div>
     {% endif %}
     
     <div class="profile_setting1">
       <form method="POST" action="{% url 'profile' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-group">
-          <label for="image">Profile Picture:</label>
-          <input type="file" name="image" accept="image/*" />
+        <div class="feth">
+        <div class="form-group_1">
+            <label for="image">Profile Picture</label>
+            <input type="file" name="image" accept="image/*" />
         </div>
-        <button type="submit" class="btn btn-primary" name="btnUpdateProfile">Update Profile</button>
+        <button type="submit" class="profile_btn" name="btnUpdateProfile">Update Profile</button>
+      </div>
       </form>
 
       <form method="POST" action="{% url 'profile' %}">
@@ -94,17 +92,31 @@
     <div class="wrapper_post">
       <h3>{{ post.title }}</h3>
       <div class="posted_paragraph_image">
+        {% if post.image %}
+        <img class="main_img_post" src="{{ post.image.url }}" alt="Post Image" />
+        {% endif %}
+
+        <div class="ab">
+          <p class="sender">
+            Author&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
+            <div class="profile_post">
+              <img src="{{ post.owner.profile.image.url }}" alt="Comment Image">
+            </div>
+            &nbsp;<a href="{% url 'view_profile' post.sender_id %}">{{ post.sender_name }}</a>
+          </p>
+        </div>
+
+
+
         <p>{{ post.content }}</p>
-        <p>Posted date: {{ post.date_posted }}</p>
-        <a href="{% url 'view_profile' post.sender_id %}">
+        
+        {% comment %} <a href="{% url 'view_profile' post.sender_id %}">
           <p>
             <img src="{{ post.owner.profile.image.url }}" alt="Comment Image" /> sender: {{ post.sender_name }}
           </p>
-        </a>
-        {% if post.image %}
-        <img src="{{ post.image.url }}" alt="Post Image" />
-        {% endif %}
-        <p>{{ post.content }}</p>
+        </a> {% endcomment %}
+        
+        
         <div class="btn_post_all">
           {% if post.pdf %}
           <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn btn-primary">Download PDF</a>

@@ -135,6 +135,13 @@ def profile (request):
             else:
                 return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user, 'password_incorrect': True, 'thisPage': 'profile'})
         elif 'btnDeleteAccount' in request.POST:
+            current_user_posts = Post.objects.filter(owner=current_user)
+            for post in current_user_posts:
+                post.delete()
+            current_user_profile = Profile.objects.get(user=current_user)
+            current_user_posts.delete()
+            if current_user_profile.image != 'profile_pics/male_def.jpg':
+                current_user_profile.delete()
             current_user.delete()
             return redirect('home')
         elif 'btnUpdateProfile' in request.POST:
@@ -161,7 +168,7 @@ def profile (request):
 def view_profile(request, user_id):
     current_user = request.user
 
-    return render(request, 'pages/view_profile.html', {'user': current_user, 'posts': Post.objects.all(), 'profilo': User.objects.get(id=user_id),})
+    return render(request, 'pages/view_profile.html', {'user': current_user, 'posts': Post.objects.all(), 'profilo': User.objects.get(id=user_id), 'thisPage': 'view_profile'})
 
 @transaction.atomic
 def sign(request):
@@ -287,3 +294,4 @@ def custom_page_not_found_view(request, exception):
 
 def custom_error_view(request):
     return render(request, '500.html')
+

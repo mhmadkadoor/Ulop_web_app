@@ -1,15 +1,25 @@
 .about_us_container {
+height:calc(100vh - 100px);
+display: flex;
+align-items: center;
+flex-direction: row;
+justify-content: center;
+}
+.about_us_container a{
+  text-decoration: none;
 
 }
 .about_us_wrapper {
-  display: flex;
   height: 500px;
-  justify-content: center;
   column-gap: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  
 }
 .about_us_person {
-  margin-top: 300px;
+ 
   width: 400px;
   height: 450px;
   border: 2px solid #f39308;
@@ -49,3 +59,82 @@
 
   font-family: "Chakra Petch", sans-serif;
 } 
+
+@media screen and (max-width: 1350px) {
+  .about_us_wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .about_us_person h1{
+    font-size: 25px;
+  }
+  .about_us_person i{
+    font-size: 25px;
+  }
+  .about_us_person {
+    width: 350px;
+    height: 400px;
+  }
+  .about_us_person p {
+    font-size: 20px;
+  }
+
+}
+@media screen and (max-width: 1200px) {
+  .about_us_wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .about_us_person h1{
+    font-size: 20px;
+  }
+  .about_us_person i{
+    font-size: 25px;
+  }
+  .about_us_person {
+    width: 250px;
+    height: 300px;
+  }
+  .about_us_person p {
+    font-size: 15px;
+  }
+
+}
+
+@media screen and (max-width: 900px) {
+  .about_us_wrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+  }
+  .about_us_person {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 350px;
+    height: 150px;
+  }
+ 
+  .about_us_person h1{
+    margin-bottom: -50px;
+    font-size: 20px;
+  }
+  .about_us_person i{
+    margin-top: 60px;
+    font-size: 25px;
+  }
+  
+  .about_us_person p {
+    margin-top: 30px;
+    font-size: 10px;
+  }
+  .about_us_person .isa{
+    margin-top: 70px;
+  }
+  .about_us_person .fethi{
+    margin-top: 70px;
+  }
+}

@@ -27,7 +27,7 @@
 }
 .container_navbar nav .logo:hover{
   transform: scale(1.12);
-  color:#ffffff;
+  color: #051c41;
 }
 .container_navbar nav ul{
   display: flex;
@@ -114,6 +114,11 @@
   height: 100%;
   object-fit: cover;
 }
+.nav_img{
+  display: flex;
+  align-items: center;
+  column-gap: 3px;
+}
 
 /* Style for when the button is clicked */
 .navbar-toggle.active .bar:nth-child(1) {
@@ -129,6 +134,7 @@
 }
 
 @media screen and (max-width: 700px) {
+  
   .container_navbar nav ul {
       max-height: 0; /* Start with a height of 0 */
       overflow: hidden; /* Hide overflowing content */
@@ -170,5 +176,6 @@
       background-color: #a3c2ff; /* Change to desired hover color */
       color: #fff; /* Change to desired text color on hover */
   }
-}
 
+
+}
