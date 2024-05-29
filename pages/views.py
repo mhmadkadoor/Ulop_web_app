@@ -7,14 +7,30 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
-from django.http import HttpResponseNotFound
 import os
 # Create your views here.
+
+BAD_WORDS = ["sex", "fuck","fucking","shit","puta","bitch","ass","motherfucker","cunt","whore","basterd","crap","damn","faggot","asswipe","douchebag","piss","cock","niga","nigger","pussy","naked"]
+
+def filter_bad_words(content):
+    """
+    Filters out bad words from the content.
+    """
+    words = content.split()
+    filtered_words = []
+
+    for word in words:
+        if word.lower() in BAD_WORDS:
+            # Replace bad words with asterisks
+            filtered_words.append("*" * len(word))
+        else:
+            filtered_words.append(word)
+
+    return " ".join(filtered_words)
 
 def view_post(request, post_id):
     comments = Comment.objects.all()
     current_post = Post.objects.get(id=post_id)
-    current_user = request.user
 
     return render(request, 'posts/view_post.html', {'post': current_post, 'comments': comments, "thisPage": 'view_post'})
 
@@ -27,7 +43,9 @@ def edit_post(request, post_id):
     if request.method == 'POST':
         if 'btnPostEdite' in request.POST:
             title = request.POST.get('title')
+            filtered_title = filter_bad_words(title)
             content = request.POST.get('content')
+            filtered_content = filter_bad_words(content)
             category = request.POST.get('category')
             visibility = request.POST.get('visibility')
             active = visibility == 'public'
@@ -46,8 +64,8 @@ def edit_post(request, post_id):
                 if os.path.isfile(old_pdf_path):
                     os.remove(old_pdf_path)
 
-            current_post.title = title
-            current_post.content = content
+            current_post.title = filtered_title
+            current_post.content = filtered_content
             current_post.category = category
             current_post.active = active
             if image:
@@ -77,8 +95,7 @@ def edit_post(request, post_id):
 
     else:
         return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})
-
-
+    
 
 
 def home(request):
@@ -86,8 +103,10 @@ def home(request):
 
     comments = Comment.objects.all()
     if request.method == 'POST':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
+        title = request.POST.get('title').strip()
+        filtered_title = filter_bad_words(title)
+        content = request.POST.get('content').strip()
+        filtered_content = filter_bad_words(content)
         image = request.FILES.get('image')
         category = request.POST.get('category')
         pdf = request.FILES.get('pdf')  # Get the PDF from the request
@@ -100,8 +119,8 @@ def home(request):
         active = request.POST.get('visibility') == 'public'
 
         # Check if a post with the same title, content, and sender_id already exists
-        if not Post.objects.filter(title=title, content=content, sender_id=sender_id).exists():
-            post = Post(title=title, content=content, category=category, sender_id=sender_id, sender_name=sender_name, active=active, owner=current_user)
+        if not Post.objects.filter(title=filtered_title, content=filtered_content, sender_id=sender_id).exists():
+            post = Post(title=filtered_title, content=filtered_content, category=category, sender_id=sender_id, sender_name=sender_name, active=active, owner=current_user)
             if image:
                 post.image = image
             if pdf:
@@ -203,10 +222,8 @@ def sign(request):
                     break
                 else:
                     user_already_exist = False
-                # Add code to check if the user exists in the database
     
             if user_already_exist:
-            # Return user_already_exist as true
                 return render(request, 'pages/sign.html', {'passwords_not_match': False,'user_already_exists': True,'account_created': False, "thisPage": 'sign'})
             else:
                 user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name, email=email)
@@ -245,7 +262,7 @@ def login(request):
     else:
         return render(request, 'pages/login.html',{ "thisPage": 'login'})
 
-@login_required(login_url='login')
+@login_required(login_url='home')
 def logout(request):
     auth.logout(request)
     return redirect('home')
@@ -257,6 +274,7 @@ def add_comment(request, post_id):
 
     if request.method == 'POST':
         content = request.POST.get('comment_content').strip()
+        filtered_content = filter_bad_words(content)
         sender_id = current_user.id
 
         if not content:
@@ -267,10 +285,10 @@ def add_comment(request, post_id):
         else:
             sender_name = f"{current_user.first_name} {current_user.last_name}"
 
-        is_unique_comment = not Comment.objects.filter(content=content, sender_id=sender_id, post=current_post, owner=current_user).exists()
+        is_unique_comment = not Comment.objects.filter(content=filtered_content, sender_id=sender_id, post=current_post, owner=current_user).exists()
 
         if is_unique_comment:
-            Comment.objects.create(post=current_post, content=content, sender_id=sender_id, sender_name=sender_name, owner=current_user)
+            Comment.objects.create(post=current_post, content=filtered_content, sender_id=sender_id, sender_name=sender_name, owner=current_user)
 
         return redirect('view_post', post_id=post_id)  
     else:
@@ -289,12 +307,12 @@ def edit_comment(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
     post = comment.post
     if request.method == 'POST':
-        content = str(request.POST.get('comment_content'))
+        content = str(request.POST.get('comment_content')).strip()
+        filtered_content = filter_bad_words(content)
         comment.content = content
-        comment.owner = current_user
         is_unique_comment = True
         for existing_comment in comments:
-            if (existing_comment.content == content) and (existing_comment.sender_id == comment.sender_id) and (existing_comment.post == post):
+            if (existing_comment.content == filtered_content) and (existing_comment.sender_id == comment.sender_id) and (existing_comment.post == post):
                 is_unique_comment = False
                 break
         if is_unique_comment:

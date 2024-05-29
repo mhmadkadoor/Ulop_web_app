@@ -11,9 +11,9 @@
 
     {% if logged_in %}
       {% if user.first_name and user.last_name %}
-      <p class="log_in_successful">&#10004; Wellcome:{{ user.first_name }} {{ user.last_name }}</p>
+      <p class="log_in_successfull"> Wellcome {{ user.first_name }} {{ user.last_name }}</p>
       {% else %}
-      <p class="log_in_successful">&#10004; Wellcome:{{ user.username }}</p>
+      <p class="log_in_successfull">&#10004; Wellcome {{ user.username }}</p>
       {% endif %}
       <script>
       setTimeout(function () {
