@@ -3,11 +3,14 @@
         return confirm('Are you sure you want to edit this comment? This action cannot be undone.');
     }
 </script>
-
-<form method="POST" action="{% url 'edit_comment_page' comment.id %}">
-    {% csrf_token %}
-    <label for="comment">Comment:</label>
-    <textarea name="comment_content" rows="4" cols="50">{{ comment }}</textarea>
-    <br>
-    <input type="submit" value="Save"  onclick="return confirmEdit()">
-</form>
+<div class="edit_comment_container">
+    <form method="POST" action="{% url 'edit_comment_page' comment.id %}">
+        {% csrf_token %}
+        <div class="edit_comment">
+        <h1 for="comment">Comment</h1>
+        <textarea name="comment_content" rows="4" cols="50">{{ comment }}</textarea>
+        <br>
+        <input type="submit" value="Save"  onclick="return confirmEdit()">
+        </div>
+    </form>
+</div>

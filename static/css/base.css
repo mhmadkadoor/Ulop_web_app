@@ -1,4 +1,8 @@
-body {
-    background-image: url("view-sky2.jpg");
-    background-attachment: fixed;
+*{
+    margin:0;
+    box-sizing: border-box;
+  
 }
+body{
+    background: #051c41
+  }

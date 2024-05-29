@@ -2,29 +2,32 @@
 {% block content %}
 {% if post.active %}
 <div class="container_post go">
-<div class="wrapper_post go">
-    
-        <h3 >{{ post.title }}</h3>
-        <div class="posted_paragraph_image">
-            {% if post.image %}
-            <img  src="{{ post.image.url }}" alt="Post Image">
-            {% endif %}
-            <p>{{ post.content }}</p>
-        </div>
-        <div class = "category_author_date_post">
-            <p class="category">Category : {{ post.get_category_display }}</p>
-            <a href="{% url 'view_profile' post.sender_id %}">
-            <p class="sender"><img src="{{ post.owner.profile.image.url }}" alt="Comment Image">Author     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.sender_name }}</p></a>
-            <p class="date">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.date_posted }}</p>
-        </div>
-        
-        {% if user.is_authenticated %}
-                {% include 'form/add_comment.html' %}
-        {% endif %}
-        {% include 'comments/comments.html' %}
-        
-    
-</div>
+  <div class="wrapper_post go">
+    <h3>{{ post.title }}</h3>
+    <div class="posted_paragraph_image">
+      {% if post.image %}
+      <img src="{{ post.image.url }}" alt="Post Image">
+      {% endif %}
+      <div class="ab">
+        <p class="sender">
+          Author:&nbsp;&nbsp;
+          <div class="profile_post">
+            <img src="{{ post.owner.profile.image.url }}" alt="Comment Image">
+          </div>
+          &nbsp;<a href="{% url 'view_profile' post.sender_id %}">{{ post.sender_name }}</a>
+        </p>
+      </div>
+      <p>{{ post.content }}</p>
+    </div>
+    <div class="category_author_date_post">
+      <p class="category">Category: {{ post.get_category_display }}</p>
+      <p class="date">Date: {{ post.date_posted }}</p>
+    </div>
+    {% if user.is_authenticated %}
+      {% include 'form/add_comment.html' %}
+    {% endif %}
+    {% include 'comments/comments.html' %}
+  </div>
 </div>
 {% endif %}
 {% endblock %}

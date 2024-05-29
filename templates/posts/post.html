@@ -2,42 +2,52 @@
   <div class="container_post">
     <div class="wrapper_post">
       <h3>{{ post.title }}</h3>
+      
       <div class="posted_paragraph_image">
         
-       {% if post.image %}
-       <a href="{{ post.image.url }}" target="_blank">
-        <img src="{{ post.image.url }}" alt="Post Image" />
-       </a>
-    
-       {% endif %}
-       <p>{{ post.content }}</p>
-       <div class="btn_post_all">
-       {% if post.pdf %}
-          <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn post_download_pdf">Download PDF</a>
+        {% if post.image %}
+          <a href="{{ post.image.url }}" target="_blank">
+            <img class="main_img_post" src="{{ post.image.url }}" alt="Post Image" />
+          </a>
         {% endif %}
-     
-        <a href="{% url 'view_post' post.id %}" class="btn post_go">go to the post</a>
-        {% if user.is_superuser or post.sender_id == user.id %}
-        <a href="{% url 'edit_post' post.id %}" class="btn post_edit">Edit</a>
-        {% endif %}
-       
-       </div>
-      </div>
-      <div class = "category_author_date_post">
-      <p class="category">Category : {{ post.get_category_display }}</p>
-      <a href="{% url 'view_profile' post.sender_id %}">
-      <p class="sender"><img src="{{ post.owner.profile.image.url }}" height="50" alt="Comment Image">Author     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.sender_name }}</p></a>
-      <p class="date">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ post.date_posted }}</p>
-      </div>
-      <div class = "post_comment"> 
         
-      {% if user.is_authenticated %}
-        {% include 'form/add_comment.html' %}
-      {% endif %}
-      <p>all comments are below</p>
-      {% include 'comments/commentsLimited.html' %}
-       </div>
-       
+        <div class="ab">
+          <p class="sender">
+            Author&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
+            <div class="profile_post">
+              <img src="{{ post.owner.profile.image.url }}" alt="Comment Image">
+            </div>
+            &nbsp;<a href="{% url 'view_profile' post.sender_id %}">{{ post.sender_name }}</a>
+          </p>
+        </div>
+        
+        <p>{{ post.content }}</p>
+        
+        <div class="btn_post_all">
+          {% if post.pdf %}
+            <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn post_download_pdf">Download PDF</a>
+          {% endif %}
+          <a href="{% url 'view_post' post.id %}" class="btn post_go">Go to the post</a>
+          {% if user.is_superuser or post.sender_id == user.id %}
+            <a href="{% url 'edit_post' post.id %}" class="btn post_edit">Edit</a>
+          {% endif %}
+        </div>
+        
+      </div>
+      
+      <div class="category_author_date_post">
+        <p class="category">Category: {{ post.get_category_display }}</p>
+        <p class="date">Date: {{ post.date_posted }}</p>
+      </div>
+      
+      <div class="post_comment"> 
+        {% if user.is_authenticated %}
+          {% include 'form/add_comment.html' %}
+        {% endif %}
+        <p></p>
+        {% include 'comments/commentsLimited.html' %}
+      </div>
+      
     </div>
   </div>
 {% endif %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <div class="about_us_container">
+  <a href="{% url 'view_profile' 1 %}">
   <div class="about_us_wrapper">
     <div class="about_us_person person1">
       <h1>BACK-END</h1>
@@ -8,15 +9,17 @@
     </div>
 
     <div class="about_us_person person2">
+      <a href="{% url 'view_profile' 65 %}">
       <h1>FRONT-END</h1>
       <h1><i class="fa-solid fa-code"></i></h1>
-      <p>Fethi Öcalan</p>
+      <p class = "fethi">Fethi Öcalan</p>
     </div>
 
     <div class="about_us_person person3">
+      <a href="{% url 'view_profile' 66 %}">
       <h1>DOCUMENTOR</h1>
       <h1><i class="fa-solid fa-file"></i></h1>
-      <p>Abubakar Bammami Isa</p>
+      <p class="isa">Abubakar Bammami Isa</p>
     </div>
   </div>
 </div>

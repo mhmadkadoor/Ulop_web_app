@@ -6,11 +6,11 @@
     <h1 class="head">Sign Up</h1>
     {% csrf_token %}
     {% if user_already_exists %}
-        <p>Error: You already have an account.</p>
+        <p class="sign_already_has_account">The username has been already taken  &#x1F5D9;</p>
     {% endif %}
     
         <input  class="sign_up_username"  type="text" name="username" required placeholder="Enter your username" onkeypress="return event.charCode !== 32">
-        <p>for more security add first and last name</p>
+        <p class="sign_more_security">!! for more security add first and last name !!</p>
         <div class ="sign_up_firstname_lastname">
         <input  class="text-1"  type="text" name="first_name" required placeholder="Enter your first name">
         <input  class="text-1"  type="text" name="last_name" required placeholder="Enter your last name">
@@ -20,10 +20,10 @@
         <input  class="text-1" type="password" name="confirm_password" required placeholder ="Confirm your password" onkeypress="return event.charCode !== 32">
      
         {% if passwords_not_match %}
-            <p>Error: Passwords do not match.</p>
+            <p class="sign_password_not_match">Passwords do not match &#x1F5D9;</p>
         {% endif %}
         {% if account_created %}
-        <p>Account created successfully.</p>
+        <p class="sign_account_successful">Account created successfully &#10004;</p>
         <script>
             setTimeout(function() {
                 window.location.href = "{% url 'login' %}";

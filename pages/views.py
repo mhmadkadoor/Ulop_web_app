@@ -62,7 +62,7 @@ def edit_post(request, post_id):
             return redirect('profile')  # Assuming you have a 'profile' named URL pattern
 
     else:
-        return render(request, 'posts/edit_post.html', {'post': current_post,})
+        return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})
 
 
 
@@ -168,7 +168,7 @@ def profile (request):
 def view_profile(request, user_id):
     current_user = request.user
 
-    return render(request, 'pages/view_profile.html', {'user': current_user, 'posts': Post.objects.all(), 'profilo': User.objects.get(id=user_id),})
+    return render(request, 'pages/view_profile.html', {'user': current_user, 'posts': Post.objects.all(), 'profilo': User.objects.get(id=user_id), 'thisPage': 'view_profile'})
 
 @transaction.atomic
 def sign(request):
@@ -266,7 +266,7 @@ def delete_comment(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
     post = comment.post
     comment.delete()
-    return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all()})
+    return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all(), 'thisPage': 'view_post'})
 
 def edit_comment(request, comment_id):
     current_user = request.user
@@ -285,12 +285,13 @@ def edit_comment(request, comment_id):
                 break
         if is_unique_comment:
             comment.save()
-        return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all(),})
+        return render(request, 'posts/view_post.html', {'post': post, 'comments': Comment.objects.all(), 'thisPage': 'view_post'})
     else:
-        return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': current_user ,})
+        return render(request, 'posts/edit_comment.html', {'comment': comment, 'user': current_user , 'thisPage': 'edit_comment'})
     
 def custom_page_not_found_view(request, exception):
     return render(request, '404.html')
 
 def custom_error_view(request):
     return render(request, '500.html')
+

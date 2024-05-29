@@ -4,8 +4,7 @@
  
   text-align: center;
   justify-content: center;
-  /* border:1px solid black; */
-  /* background-color:aqua; */
+  
  
 }
 .wrapper_share_post h1{
@@ -25,7 +24,7 @@
   outline:none;
   border:none;
   background-color: transparent;
-  border-bottom: 2px solid rgb(255, 255, 255);
+  border-bottom: 2px solid #df8543;
   height:20px;
   width:300px;
   transition: 0.5s ease;
@@ -39,8 +38,10 @@
 }
 .share_post_title_content .content{
  
-  min-height: 250px;
-  width :500px;
+  min-height: 400px;
+  background-color: #ecf6c7;
+  width :450px;
+  font-weight: bold;
   padding-left: 20px;
   padding-right:20px;
   padding-top:10px;
@@ -62,11 +63,11 @@
   display: inline-block;
   cursor: pointer;
   padding: 8px 15px;
-  background-color: #ffffff;
+  background-color: #ecf6c7;
   color: #000000;
   border: none;
   font-size: 16px;
-  transition:0.2s ease;
+  transition:0.5s ease;
   border-radius:10px 0px 10px 10px;
   border:1px solid white;
 }
@@ -83,6 +84,7 @@
 .post_category select {
    
     padding-top: 8px;
+    background-color: #ecf6c7;
     padding-bottom: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -95,11 +97,11 @@
   margin-top: 10px;
   cursor: pointer;
   padding: 8px 90px;
-  background-color: #ffffff;
+  background-color: #ecf6c7;
   color: #000000;
   border: none;
   font-size: 16px;
-  transition: background-color 0.5s ease;
+  transition:0.5s ease;
   border-radius:10px 0px 10px 10px;
   border:1px solid white;
 }

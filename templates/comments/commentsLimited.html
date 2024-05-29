@@ -1,6 +1,6 @@
-
+<p>All comments are below</p>
 {% for comment in comments %}
-  {% if forloop.counter <= 2 %}
+  {% if forloop.counter <= 3 %}
     {% include 'comments/comment.html' %}
   {% endif %}
 {% endfor %}
