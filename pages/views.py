@@ -60,6 +60,20 @@ def edit_post(request, post_id):
         elif 'btnPostDelete' in request.POST:
             current_post.delete()
             return redirect('profile')  # Assuming you have a 'profile' named URL pattern
+        elif 'btnPdfDelete' in request.POST:
+            pdf_path = current_post.pdf.path
+            if os.path.isfile(pdf_path):
+                os.remove(pdf_path)
+            current_post.pdf = None
+            current_post.save()
+            return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})
+        elif 'btnImageDelete' in request.POST:
+            image_path = current_post.image.path
+            if os.path.isfile(image_path):
+                os.remove(image_path)
+            current_post.image = None
+            current_post.save()
+            return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})
 
     else:
         return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})

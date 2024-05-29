@@ -8,6 +8,12 @@
     function confirmEditPost() {
         return confirm('Are you sure you want to edit this post?');
     }
+    function confirmDeletePdf() {
+        return confirm('Are you sure you want to delete the PDF file ?');
+    }
+    function confirmDeleteImage() {
+        return confirm('Are you sure you want to delete the image file ?');
+    }
 </script>
 
 {% if user.id == post.sender_id or user.is_superuser %}
@@ -58,9 +64,20 @@
     <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostEdite' onclick="return confirmEditPost()">Post</button>
 </form>
 <form method="POST" action="{% url 'edit_post' post.id %}">
+  {% csrf_token %}
+  <button class="post-btn" type="submit" class="btn btn-primary" name='btnImageDelete'  onclick="return confirmDeleteImage()" >Delete the image</button>
+
+<form method="POST" action="{% url 'edit_post' post.id %}">
+  {% csrf_token %}
+  <button class="post-btn" type="submit" class="btn btn-primary" name='btnPdfDelete'  onclick="return confirmDeletePdf()" >Delete the PDF</button>
+</form>
+
+
+<form method="POST" action="{% url 'edit_post' post.id %}">
     {% csrf_token %}
     <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostDelete'  onclick="return confirmDeletePost()" >Delete the post</button>
 </form>
+
 {% else %}
 
 <style>
