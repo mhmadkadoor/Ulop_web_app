@@ -18,6 +18,16 @@
         </p>
       </div>
       <p>{{ post.content }}</p>
+
+      <div class="btn_post_all">
+        {% if post.pdf %}
+          <a href="{{ post.pdf.url }}" download="{{ post.title|slugify }}.pdf" class="btn post_download_pdf">Download PDF</a>
+        {% endif %}
+        {% if user.is_superuser or post.sender_id == user.id %}
+          <a href="{% url 'edit_post' post.id %}" class="btn post_edit">Edit this post</a>
+        {% endif %}
+      </div>
+
     </div>
     <div class="category_author_date_post">
       <p class="category">Category: {{ post.get_category_display }}</p>

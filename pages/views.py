@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from django.conf import settings
 import os
 # Create your views here.
 
@@ -73,25 +74,37 @@ def edit_post(request, post_id):
             if pdf:
                 current_post.pdf = pdf
             current_post.save()
-            return redirect('profile')  # Assuming you have a 'profile' named URL pattern
+            return redirect('view_post', post_id=post_id)  
 
         elif 'btnPostDelete' in request.POST:
             current_post.delete()
-            return redirect('profile')  # Assuming you have a 'profile' named URL pattern
+            return redirect('profile') 
         elif 'btnPdfDelete' in request.POST:
-            pdf_path = current_post.pdf.path
-            if os.path.isfile(pdf_path):
-                os.remove(pdf_path)
-            current_post.pdf = None
+            if current_post.pdf:
+                folder_path = os.path.join(settings.MEDIA_ROOT, f"posted_pdfs/{current_post.date_posted.strftime('%Y/%m/%d')}")
+                if os.path.exists(folder_path):
+                    for filename in os.listdir(folder_path):
+                        file_path = os.path.join(folder_path, filename)
+                        if os.path.isfile(file_path):
+                            os.remove(file_path)
+                    os.rmdir(folder_path)
+                current_post.pdf.delete()
             current_post.save()
             return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})
         elif 'btnImageDelete' in request.POST:
-            image_path = current_post.image.path
-            if os.path.isfile(image_path):
-                os.remove(image_path)
-            current_post.image = None
+            if current_post.image:
+                folder_path = os.path.join(settings.MEDIA_ROOT, f"posted_images/{current_post.date_posted.strftime('%Y/%m/%d')}")
+                if os.path.exists(folder_path):
+                    for filename in os.listdir(folder_path):
+                        file_path = os.path.join(folder_path, filename)
+                        if os.path.isfile(file_path):
+                            os.remove(file_path)
+                    os.rmdir(folder_path)
+                current_post.image.delete()
             current_post.save()
             return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})
+        elif 'btnCancel' in request.POST:
+            return redirect('view_post', post_id=post_id) 
 
     else:
         return render(request, 'posts/edit_post.html', {'post': current_post, "thisPage": 'edit_post'})

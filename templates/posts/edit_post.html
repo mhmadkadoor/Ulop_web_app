@@ -61,8 +61,11 @@
         </select>
         </div>
     </div>
+
+    <button class="post-btn" type="submit" class="btn btn-primary" name='btnCancel' >Cancel</button>
     <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostEdite' onclick="return confirmEditPost()">Post</button>
 </form>
+
 <form method="POST" action="{% url 'edit_post' post.id %}">
   {% csrf_token %}
   <button class="post-btn" type="submit" class="btn btn-primary" name='btnImageDelete'  onclick="return confirmDeleteImage()" >Delete the image</button>

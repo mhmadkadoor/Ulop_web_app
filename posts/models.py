@@ -28,7 +28,6 @@ class Post(models.Model):
         return self.title
 
     def delete(self, *args, **kwargs):
-        # Delete the image file and its folder
         if self.image:
             folder_path = os.path.join(settings.MEDIA_ROOT, f"posted_images/{self.date_posted.strftime('%Y/%m/%d')}")
             if os.path.exists(folder_path):
@@ -38,7 +37,6 @@ class Post(models.Model):
                         os.remove(file_path)
                 os.rmdir(folder_path)
 
-        # Delete the PDF file and its folder
         if self.pdf:
             folder_path = os.path.join(settings.MEDIA_ROOT, f"posted_pdfs/{self.date_posted.strftime('%Y/%m/%d')}")
             if os.path.exists(folder_path):
