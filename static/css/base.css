@@ -4,5 +4,23 @@
   
 }
 body{
-    background: #051c41
+    background: #00797D;
   }
+    /* Custom scrollbar styles for WebKit browsers (e.g., Chrome, Safari) */
+    body::-webkit-scrollbar {
+        width: 12px; /* Adjust the width as needed */
+    }
+
+    body::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Background color of the scrollbar track */
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: #000000; /* Color of the scrollbar thumb */
+        border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+        border: 3px solid #f1f1f1; /* Adds space around the thumb */
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+        background: #000000; /* Color of the scrollbar thumb when hovered */
+    }

@@ -1,14 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
 .wrapper_share_post{
+  display: flex;
   font-family: "Ubuntu Sans Mono", monospace;
- 
   text-align: center;
   justify-content: center;
   
  
 }
+.home{
+  position: relative;
+  margin-top: 15px;
+  border: 4px solid #ecf6c7;
+  width: 600px;
+  border-radius: 0px 50px 0px 50px;
+  padding-bottom:20px;
+  background-color: rgb(30, 81, 83);
+
+}
 .wrapper_share_post h1{
-   margin-top: 30px;
+   margin-top: 20px;
    color:#f39308;
 
 }
@@ -19,6 +29,10 @@
   flex-direction:column;
   justify-content: center;
   row-gap: 10px;
+}
+.share_post_title_content .title::placeholder{
+  color:#ecf6c7;
+
 }
 .share_post_title_content .title{
   outline:none;
@@ -37,7 +51,7 @@
 
 }
 .share_post_title_content .content{
- 
+  z-index: 20;
   min-height: 400px;
   background-color: #ecf6c7;
   width :450px;
@@ -69,13 +83,13 @@
   font-size: 16px;
   transition:0.5s ease;
   border-radius:10px 0px 10px 10px;
-  border:1px solid white;
+  border:1px solid #f39308;
 }
 
 .file-input-button:hover {
   background-color:#f39308;
   color:#ffffff;
-  border:1px solid#df8543;
+  border:1px solid #ecf6c7;
   border-radius:0px 10px 10px 10px
 }
 
@@ -86,11 +100,13 @@
     padding-top: 8px;
     background-color: #ecf6c7;
     padding-bottom: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #f39308;
     border-radius: 4px;
     font-size: 16px;
     outline: none;
-    width: 10%;
+    width: 100px;
+    margin-bottom: 2px;
+    margin-top:2px;
 }
 
 .wrapper_share_post button{
@@ -103,15 +119,56 @@
   font-size: 16px;
   transition:0.5s ease;
   border-radius:10px 0px 10px 10px;
-  border:1px solid white;
+  border:1px solid #f39308;
 }
 .wrapper_share_post button:hover{
   background-color:#f39308;
   color:#ffffff;
-  border:1px solid#df8543;
+  border:1px solid #ecf6c7;
   border-radius:0px 10px 10px 10px
 }
+.leaf_6{
+  z-index: 10;
+  position: absolute;
+  bottom: -21px;
+  left: -40px;
+  width: 200px;
+  height: 300px;
+  background-image: url(./leaf_6_remove.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50px;
+ 
+}
+.leaf_7{
 
+  z-index: 30;
+  position: absolute;
+  top: 4px;
+  right: -40px;
+  width: 200px;
+  height: 300px;
+  background-image: url(./leaf_7_remove.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+ 
+}
+.leaf_8{
+
+  z-index: 10;
+  position: absolute;
+  bottom: -7px;
+  right: -60px;
+  width: 200px;
+  height: 300px;
+  background-image: url(./leaf_8_remove.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+ 
+}
 
 
 

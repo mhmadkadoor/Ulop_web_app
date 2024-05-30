@@ -11,6 +11,7 @@
  
 }
 .sign_up form{
+  position:relative;
   padding: 100px 50px;
   margin-top: 80px;
   height: fit-content;
@@ -80,4 +81,32 @@ border: 1px solid  #df8543;
 }
 .sign_already_has_account{
   color: rgb(255, 0, 0);
+}
+
+.snake{
+  position: absolute;
+  bottom: -19px;
+  right: -35px;
+  width: 200px;
+  height: 200px;
+  background-image: url(./remove_snake.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50px;
+ 
+}
+.monkey{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width:205px;
+  height: 200px;
+  background-image: url(./Removal-540.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50px 0px 0px 0px;
+
+ 
 }

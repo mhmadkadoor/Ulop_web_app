@@ -1,6 +1,15 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% block content %}
 <div class="log_in">
   <form method="POST">
+    <div class="leaf">
+    </div>
+    <div class="butterflies">
+    </div>
+    <div class="leaf_2">
+    </div>
+    <div class="girrafe">
+    </div>
     <h1 class="head">Log in</h1>
     {% csrf_token %}
 
@@ -53,6 +62,5 @@
     {% endif %}
     <input class="btn" type="submit" value="Login" />
   </form>
-  
 </div>
 {% endblock %}

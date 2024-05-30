@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
- 
   width: 100%;
 
   height: calc(100vh - 90px);
@@ -45,7 +44,7 @@
   margin-bottom: 40px;
   border: 2px solid #787878;
   text-align: center;
-  background-color: #feda6a;
+  background-color:#ecf6c7 ;
   padding: 20px 50px 60px 50px;
   border-radius: 10px;
   transform: scale(1);
@@ -94,7 +93,7 @@ margin-bottom: -100px;
 .profile_setting1 form .profile_input {
   display: flex;
   outline: none;
-  background-color: #feda6a;
+  background-color:#ecf6c7 ;
   border: none;
   font-size: 20px;
 }
