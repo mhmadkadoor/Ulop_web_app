@@ -1,6 +1,14 @@
 {% extends 'base.html' %} {% block content %} {% if user.is_authenticated %}
 <div class="wrapper_share_post">
+  <div class="home">
+    <div class="leaf_6">
+    </div>
+    <div class="leaf_7">
+    </div>
+    <div class="leaf_8">
+    </div>
   <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
+    
     {% csrf_token %}
     <div><h1>Posts</h1></div>
     <div class="share_post_title_content">
@@ -56,6 +64,7 @@
     </div>
     <button class="post-btn" type="submit">Post</button>
   </form>
+  </div>
 </div>
 
 {% endif %} {% include "posts/posts.html" %} {% endblock content %}

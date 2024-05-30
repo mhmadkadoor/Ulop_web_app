@@ -1,6 +1,15 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% block content %}
 <div class="log_in">
   <form method="POST">
+    <div class="leaf">
+    </div>
+    <div class="butterflies">
+    </div>
+    <div class="leaf_2">
+    </div>
+    <div class="girrafe">
+    </div>
     <h1 class="head">Log in</h1>
     {% csrf_token %}
 
@@ -11,9 +20,9 @@
 
     {% if logged_in %}
       {% if user.first_name and user.last_name %}
-      <p class="log_in_successful">&#10004; Wellcome:{{ user.first_name }} {{ user.last_name }}</p>
+      <p class="log_in_successfull">&#10004; Welcome {{ user.first_name }} {{ user.last_name }}</p>
       {% else %}
-      <p class="log_in_successful">&#10004; Wellcome:{{ user.username }}</p>
+      <p class="log_in_successfull">&#10004; Welcome {{ user.username }}</p>
       {% endif %}
       <script>
       setTimeout(function () {
@@ -53,6 +62,5 @@
     {% endif %}
     <input class="btn" type="submit" value="Login" />
   </form>
-  
 </div>
 {% endblock %}
