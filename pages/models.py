@@ -18,12 +18,17 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
     def delete(self, *args, **kwargs):
-        # Delete the image file
+        # Delete the entire folder associated with the user's profile image
         if self.image:
-            image_path = os.path.join(settings.MEDIA_ROOT, self.image.name)
-            if os.path.isfile(image_path):
-                os.remove(image_path)
-        super().delete(*args, **kwargs)  # Call the "real" delete() method.
+            folder_path = os.path.join(settings.MEDIA_ROOT, f"profile_pics/user_{self.user.id}")
+            if os.path.exists(folder_path):
+                # Remove the folder and its contents
+                for filename in os.listdir(folder_path):
+                    file_path = os.path.join(folder_path, filename)
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+                os.rmdir(folder_path)
+        super().delete(*args, **kwargs)
 
     class Meta:
         verbose_name = "All Profile"
