@@ -6,12 +6,31 @@
   margin-bottom: 5px;
   position: relative;
 }
+
+/* .comment_line{
+  position: relative;
+  border:1px solid rgb(213, 31, 31);
+  border-radius: 20px;
+  overflow-y:hidden;
+  he
+} */
+/* .comment_line button{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  outline:none;
+  border:none;
+  background-color: transparent;
+  font-family: sans-serif;
+  color:rgb(104, 104, 104);
+  cursor:pointer;
+} */
+
 .comment_container_homepage h4{
  color:rgb(0, 0, 0);
- font-size:15px;
+ font-size:13px;
  margin-left: 40px;
-
- margin-bottom: 15px;
+ margin-bottom: 10px;
  word-wrap: break-word;
  
 
@@ -28,3 +47,40 @@
   left: 15px;
   bottom: 5px;
 }
+
+
+.comment_line {
+  position: relative;
+  width: auto;
+  height: auto;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.comment_content {
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  max-height: 3em; /* 1em * number of lines */
+}
+
+.read_more_button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  outline:none;
+  border:none;
+  background-color: transparent;
+  font-family: sans-serif;
+  color:rgb(104, 104, 104);
+  cursor:pointer;
+}
+
+.comment_content.expanded {
+  -webkit-line-clamp: unset;
+  max-height: none;
+}
+

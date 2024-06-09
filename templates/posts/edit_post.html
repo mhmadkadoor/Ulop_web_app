@@ -17,7 +17,9 @@
 </script>
 
 {% if user.id == post.sender_id or user.is_superuser %}
+
 <div class="wrapper_share_post">
+ 
 <form method="POST" action="{% url 'edit_post' post.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     <div><h1>Post</h1></div>
@@ -64,8 +66,7 @@
 
     <button class="post-btn" type="submit" class="btn btn-primary" name='btnCancel' >Cancel</button>
     <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostEdite' onclick="return confirmEditPost()">Post</button>
-</form>
-
+    
 <form method="POST" action="{% url 'edit_post' post.id %}">
   {% csrf_token %}
   <button class="post-btn" type="submit" class="btn btn-primary" name='btnImageDelete'  onclick="return confirmDeleteImage()" >Delete the image</button>
@@ -73,13 +74,16 @@
 <form method="POST" action="{% url 'edit_post' post.id %}">
   {% csrf_token %}
   <button class="post-btn" type="submit" class="btn btn-primary" name='btnPdfDelete'  onclick="return confirmDeletePdf()" >Delete the PDF</button>
-</form>
-
 
 <form method="POST" action="{% url 'edit_post' post.id %}">
-    {% csrf_token %}
-    <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostDelete'  onclick="return confirmDeletePost()" >Delete the post</button>
+  {% csrf_token %}
+  <button class="post-btn" type="submit" class="btn btn-primary" name='btnPostDelete'  onclick="return confirmDeletePost()" >Delete the post</button>
+
+
+
+
 </form>
+
 
 {% else %}
 
