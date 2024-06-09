@@ -9,9 +9,13 @@
                 <img src="{{ profilo.profile.image.url }}" alt="Profile Picture" >
             </div>
       {% endif %}
-      </div>
-</div>
 
+      </div>
+     
+</div>
+ {% if profilo.profile.bio %}
+            <p>{{ profilo.profile.bio }}</p>
+      {% endif %}
 
 {% for post in posts %}
         {% if  post.sender_id == profilo.id %}

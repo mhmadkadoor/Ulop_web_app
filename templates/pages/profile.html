@@ -30,10 +30,20 @@
       </div>
       </form>
 
+      <form method='POST' action="{% url 'profile' %}">
+        {% csrf_token %}
+        <p>Bio: {{ user.profile.bio }}</p>
+        <textarea class="profile_input_enter" name="bio" placeholder="Enter your bio">{{ user.profile.bio }}</textarea>
+        {% if bio_updated %}
+        <p class= "bio_updated" >&#10004; Bio changed successfully</p>
+        {% endif %}
+        <button type="submit" class="btn" name="btnUpdateBio">Change Bio</button>
+      </form>
+
       <form method="POST" action="{% url 'profile' %}">
         {% csrf_token %}
-        <input class="profile_input" type="text" name="UsernameField" required placeholder="Username: {{user.username}}" readonly />
-        <input class="profile_input" type="text" name="IdField" required placeholder="User ID: {{user.id}}" readonly />
+        <input class="profile_input" type="text"  placeholder="Username: {{user.username}}" readonly />
+        <input class="profile_input" type="text"  placeholder="User ID: {{user.id}}" readonly />
         {% if user.email %}
         <input class="profile_input" type="text" name="EmailField" required placeholder="{{user.email}}" readonly />
         {% endif %}
