@@ -24,7 +24,7 @@
   margin-right: 30px;
   padding:20px 20px 20px 20px;
   width:355px ;
-  min-height: 650px;
+  min-height: 850px;
   border-radius:50px 0px 50px 50px;
   transform: scale(1);
   transition: 0.5s ease;
@@ -75,7 +75,9 @@
   width: 100%;
   position: absolute;
   display: flex;
-  justify-content: space-around;
+  column-gap: 7.2px;
+  justify-content: left;
+  
   bottom:0;
   left:0;
 }
@@ -88,6 +90,7 @@
  color:#ecf6c7;
  transition: 0.5s ease;
  transform: scale(1);
+ padding:2px 15px;
 }
 .wrapper_post .posted_paragraph_image .btn:hover{
   transform: scale(1.1);
@@ -198,7 +201,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
    
     width:400px ;
-    min-height: 650px;
+    min-height: 850px;
    
     
   }
@@ -207,7 +210,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
   
     width:400px ;
-    min-height: 650px;
+    min-height: 600px;
   
     
   }
@@ -216,7 +219,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
    
     width:600px ;
-    min-height: 650px;
+    min-height: 600px;
     
     
   }
@@ -225,7 +228,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
     
     width:350px ;
-    min-height: 650px;
+    min-height: 600px;
     
     
   }
