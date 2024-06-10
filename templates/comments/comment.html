@@ -16,9 +16,33 @@
 
 
        
+              <div class="comment_line">
+                <h4 class="comment_content" id="comment{{ forloop.counter }}">{{ comment.content }}</h4>
+                <button class="read_more_button" onclick="toggleReadMore('comment{{ forloop.counter }}')" style="display: none;">Read more...</button>
+            </div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            var comments = document.querySelectorAll('.comment_content');
+            comments.forEach(function(comment) {
+                if (comment.scrollHeight > comment.clientHeight + 1) {
+                    comment.nextElementSibling.style.display = 'inline-block'; // Show the "Read more..." button
+                }
+            });
+        });
         
-        <h4 class="comment_content">{{ comment.content }}</h4>
-
+        function toggleReadMore(commentId) {
+            var commentContent = document.getElementById(commentId);
+            var button = commentContent.nextElementSibling;
+            if (commentContent.classList.contains('expanded')) {
+                commentContent.classList.remove('expanded');
+                button.textContent = 'Read more...';
+            } else {
+                commentContent.classList.add('expanded');
+                button.textContent = 'Read less';
+            }
+        }
+        
+        </script>
         
 
         <p class="comment_date">{{ comment.date_posted }}</p>

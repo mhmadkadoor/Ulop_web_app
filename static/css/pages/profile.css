@@ -143,6 +143,9 @@ margin-bottom: -100px;
 .email_empty{
   color: red;
 }
+.bio_updated{
+  color:green;
+}
 
 
 .container_post {

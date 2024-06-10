@@ -11,7 +11,29 @@ from django.conf import settings
 import os
 # Create your views here.
 
-BAD_WORDS = ["sex", "fuck","fucking","shit","puta","bitch","ass","motherfucker","cunt","whore","basterd","crap","damn","faggot","asswipe","douchebag","piss","cock","niga","nigger","pussy","naked"]
+BAD_WORDS = [
+    "sex", "fuck", "fucking", "shit", "puta", "bitch", "ass", "motherfucker", 
+    "cunt", "whore", "bastard", "crap", "damn", "faggot", "asswipe", 
+    "douchebag", "piss", "cock", "niga", "nigger", "pussy", "naked",
+    "dick", "asshole", "slut", "bollocks", "arse", "bugger",
+    "bloody", "c**t", "screw", "wanker", "knobhead", "tosser", "bellend",
+    "twat", "prick", "dipshit", "dumbass", "bullshit", "freaking",
+    "shitfaced", "assclown", "cockwomble",
+    "fuckwit", "dickhead", "piss off", "dickwad", "twatwaffle",
+    "fuckface", "fuckery", "clusterfuck", "assface", "shitstorm",
+    "butt munch", "cuntnugget", "ass goblin", "piss flaps", "cock jockey",
+    "dick cheese", "twat nugget", "wank stain", "cunt nugget", "arse biscuit",
+    "shit biscuit", "wank nugget", "fuck nugget", "crap basket", "fuck bucket",
+    "douche nozzle", "shit waffle", "ass monkey", "shit monkey", "cock gobbler",
+    "fart knocker", "dick muncher", "cum dumpster", "asshatery", "fucknuttery",
+    "cuntbiscuit", "cock juggling thundercunt", "piss wizard", "fuck trumpet",
+    "shit rocket", "fucknugget", "twatwaffle", "douchecanoe",
+    "shit goblin", "asshatery", "fucknuttery", "shitlord", "cockwomble",
+    "assmunch", "dickbag", "fuckboy", "fucknut", "shitforbrains", "asswipe",
+    "shitbag", "douche rocket", "wanker", "fucktard", "douchelord", "fart face",
+    "cockgoblin", "fuckstick", "dickwaffle", "twatwad", "shitbird", "dickweed",
+    "cuntface"
+]
 
 def filter_bad_words(content):
     """
@@ -152,7 +174,6 @@ def about (request):
 @transaction.atomic
 @login_required(login_url='login')
 def profile (request):
-    profileReturn = Profile.objects.get_or_create(user=request.user)[0]
     current_user = request.user
 
     if request.method == 'POST':
@@ -191,21 +212,28 @@ def profile (request):
             current_user.delete()
             return redirect('home')
         elif 'btnUpdateProfile' in request.POST:
-            # Handle profile update logic
+            
             if 'image' in request.FILES:
-                # Get the current profile
+
                 profile = Profile.objects.get(user=current_user)
-                # Check if the user already has a profile picture
+
                 if profile.image and profile.image != 'profile_pics/male_def.jpg':
-                    # Delete the old profile picture
+
                     profile.image.delete()
-                # Save the new profile picture
+
                 profile.image = request.FILES['image']
                 profile.save()
                 messages.success(request, 'Profile picture updated successfully.')
             else:
                 messages.error(request, 'No image selected for upload.')
             return redirect('profile')
+        elif 'btnUpdateBio' in request.POST:
+            bio = request.POST.get('bio')
+            profile = Profile.objects.get(user=current_user)
+            profile.bio = bio
+            profile.save()
+            messages.success(request, 'Bio updated successfully.')
+            return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'thisPage': 'profile', 'bio_updated': True})
         
     return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'thisPage': 'profile'})
 
