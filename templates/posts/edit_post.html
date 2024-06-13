@@ -18,16 +18,16 @@
 
 {% if user.id == post.sender_id or user.is_superuser %}
 
-<div class="wrapper_share_post_edit">
+<div class="wrapper_share_post">
  
 <form method="POST" action="{% url 'edit_post' post.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     <div><h1>Post</h1></div>
-    <div class="share_post_title_content_edit">
+    <div class="share_post_title_content">
         <input class="title" type="text" name="title" required value="{{ post.title }}">
         <textarea class="content" name="content" required>{{ post.content }}</textarea>
     </div>
-    <div class="share_image_pdf_edit">
+    <div class="share_image_pdf">
         <input
           type="file"
           name="image"
@@ -35,7 +35,7 @@
           id="image-input"
           class="file-input"
         />
-        <label for="image-input" class="file-input-button_edit">Choose Img</label>
+        <label for="image-input" class="file-input-button">Choose Img</label>
   
         <input
           type="file"
@@ -44,16 +44,16 @@
           id="pdf-input"
           class="file-input"
         />
-        <label for="pdf-input" class="file-input-button_edit">Choose PDF</label>
+        <label for="pdf-input" class="file-input-button">Choose PDF</label>
     </div>
-    <div class="post_public_catregory_edit">
+    <div class="post_public_catregory">
         <div class="post_public_private">
             <select name="visibility" required>
                 <option value="public" {% if post.visibility == 'public' %}selected{% endif %}>Public</option>
                 <option value="private" {% if post.visibility == 'private' %}selected{% endif %}>Private</option>
             </select>
         </div>
-        <div class="post_category_edit">
+        <div class="post_category">
             <select name="category" required>
                 <option value="News" {% if post.category == 'News' %}selected{% endif %}>News</option>
                 <option value="Question" {% if post.category == 'Question' %}selected{% endif %}>Question</option>
@@ -68,17 +68,17 @@
 
 <form method="POST" action="{% url 'edit_post' post.id %}">
   {% csrf_token %}
-  <button class="post-btn_edit" type="submit" class="btn btn-primary" name="btnImageDelete" onclick="return confirmDeleteImage()">Delete the image</button>
+  <button class="post-btn" type="submit" class="btn btn-primary" name="btnImageDelete" onclick="return confirmDeleteImage()">Delete the image</button>
 </form>
 
 <form method="POST" action="{% url 'edit_post' post.id %}">
   {% csrf_token %}
-  <button class="post-btn_edit" type="submit" class="btn btn-primary" name="btnPdfDelete" onclick="return confirmDeletePdf()">Delete the PDF</button>
+  <button class="post-btn" type="submit" class="btn btn-primary" name="btnPdfDelete" onclick="return confirmDeletePdf()">Delete the PDF</button>
 </form>
 
 <form method="POST" action="{% url 'edit_post' post.id %}">
   {% csrf_token %}
-  <button class="post-btn_edit" type="submit" class="btn btn-primary" name="btnPostDelete" onclick="return confirmDeletePost()">Delete the post</button>
+  <button class="post-btn" type="submit" class="btn btn-primary" name="btnPostDelete" onclick="return confirmDeletePost()">Delete the post</button>
 </form>
   <button class="post-btn" type="submit" class="btn btn-primary" name="btnCancel">Cancel</button>
   <button class="post-btn" type="submit" class="btn btn-primary" name="btnPostEdit" onclick="return confirmEditPost()">Post</button>
