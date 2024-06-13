@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
- 
+<div class="comple_view">
 <div class="view_profile">
     <div class="view_profile_header">
 <p>{{ profilo.first_name }} {{ profilo.last_name }}</p>
@@ -13,10 +13,14 @@
       </div>
      
 </div>
- {% if profilo.profile.bio %}
-            <p>{{ profilo.profile.bio }}</p>
-      {% endif %}
-
+{% if profilo.profile.bio %}
+<div class="biography">
+    <div class = "bio">
+    <p>{{ profilo.profile.bio }}</p>
+    </div>
+</div>
+{% endif %}
+<div class = "ne_lan_div">
 {% for post in posts %}
         {% if  post.sender_id == profilo.id %}
             {% if post.active %}
@@ -24,6 +28,6 @@
             {% endif %}
         {% endif %}
     {% endfor %}
-
-
+</div>
+</div>
 {% endblock %}

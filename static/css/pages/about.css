@@ -1,5 +1,5 @@
 .about_us_container {
-height:calc(100vh - 100px);
+
 display: flex;
 align-items: center;
 flex-direction: row;
@@ -106,6 +106,7 @@ justify-content: center;
 @media screen and (max-width: 900px) {
   .about_us_wrapper{
     display: flex;
+    margin-top: 50px;
     flex-direction: column;
     row-gap: 20px;
     align-items: center;

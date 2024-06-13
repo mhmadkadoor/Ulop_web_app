@@ -10,7 +10,7 @@
  .container_post {
   font-family: "Poppins", sans-serif;
   display:inline-flex;
-  margin-top: 100px;
+  margin-top: 40px;
   align-items: center;
   
  
@@ -24,7 +24,7 @@
   margin-right: 30px;
   padding:20px 20px 20px 20px;
   width:355px ;
-  min-height: 850px;
+  min-height: 550px;
   border-radius:50px 0px 50px 50px;
   transform: scale(1);
   transition: 0.5s ease;
@@ -33,7 +33,7 @@
 }
 .wrapper_post:hover{
 
-  transform: scale(1.05);
+  transform: scale(1.03);
   }
 .wrapper_post h3{
   /* font-weight: bold; */
@@ -201,7 +201,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
    
     width:400px ;
-    min-height: 850px;
+    min-height: 950px;
    
     
   }
@@ -210,7 +210,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
   
     width:400px ;
-    min-height: 600px;
+    min-height: 950px;
   
     
   }
@@ -219,7 +219,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
    
     width:600px ;
-    min-height: 600px;
+    min-height: 950px;
     
     
   }
@@ -228,7 +228,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
     
     width:350px ;
-    min-height: 600px;
+    min-height: 950px;
     
     
   }
@@ -237,7 +237,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
    
     width:550px ;
-    min-height: 650px;
+    min-height: 950px;
     
     
   }
@@ -246,7 +246,7 @@ p::-webkit-scrollbar-thumb:active {
   .wrapper_post {
     
     width:355px ;
-    min-height: 650px;
+    min-height: 950px;
     
     
   }
@@ -254,6 +254,6 @@ p::-webkit-scrollbar-thumb:active {
 @media screen and (max-width: 1283px){
   .wrapper_post {
     width:355px ;
-    min-height: 650px;
+    min-height: 950px;
   }
 }
