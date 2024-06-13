@@ -1,7 +1,5 @@
-.edit_post_image img{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 20px;
+.share_post_title_content .content {
+  max-width: 500px;
+  min-width: 500px;
+  min-height: 250px;
 }

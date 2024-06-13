@@ -7,9 +7,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-
-  height: calc(100vh - 90px);
   font-family: "Roboto Mono", monospace;
+  margin-top: -100px;
 }
 .profile_pic{
   width: 100px; 
@@ -378,4 +377,54 @@ display: flex;
 
 .form-group_1 input[type="file"]::file-selector-button:active {
   background-color: #003d80;
+}
+.bio_profile_container{
+  width:400px;
+  border: 1px solid black;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom:10px;
+  border-radius:50px 0px 50px 50px;
+}
+.bio_profile_container p{
+  word-wrap: break-word;
+
+}
+.bio_profile{
+  color:#000000;
+}
+.bio{
+  margin-bottom: 5px;
+  color:#6e6e6e;
+  font-size: 25px;
+}
+
+.bio_area p{
+  margin-top: 15px;
+}
+.bio_area textarea {
+  min-width: 275px;
+  max-width: 275px;
+  min-height: 150px;
+  padding: 5px !important;
+  overflow-y: auto;
+}
+
+/* Scrollbar styling */
+.bio_area textarea::-webkit-scrollbar {
+  width: 8px; /* width of the scrollbar */
+}
+
+.bio_area textarea::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+.bio_area textarea::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 10px; /* roundness of the thumb */
+}
+
+.bio_area textarea::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb when hovered */
 }

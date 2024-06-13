@@ -32,10 +32,19 @@
 
       <form method='POST' action="{% url 'profile' %}">
         {% csrf_token %}
-        <p>Bio: {{ user.profile.bio }}</p>
+        <div class="bio_profile_container">
+          <p class ="bio"> Biography</p>
+        <p>{{ user.profile.bio }}</p>
+      </div>
+      <div class = "bio_area">
+        <p>Change your biography</p>
         <textarea class="profile_input_enter" name="bio" placeholder="Enter your bio">{{ user.profile.bio }}</textarea>
+      </div>
         {% if bio_updated %}
         <p class= "bio_updated" >&#10004; Bio changed successfully</p>
+        {% endif %}
+        {% if bio_long %}
+        <p class= "bio_updated" > &#x1F5D9; bio is too long!!</p>
         {% endif %}
         <button type="submit" class="btn" name="btnUpdateBio">Change Bio</button>
       </form>
