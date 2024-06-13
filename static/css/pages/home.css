@@ -1,75 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
-.wrapper_share_post{
+
+body {
+  background-color: #f5f5f5;
+}
+
+.wrapper_share_post {
   display: flex;
   font-family: "Ubuntu Sans Mono", monospace;
   text-align: center;
   justify-content: center;
-  
+  padding: 20px;
+  flex-wrap: wrap;
+  align-items: center;
  
+
 }
-.home{
+
+.home {
   position: relative;
-  margin-top: 15px;
+  margin-top: 0px;
   border: 4px solid #ecf6c7;
   width: 600px;
   border-radius: 0px 50px 0px 50px;
-  padding-bottom:20px;
+  padding-bottom: 20px;
   background-color: rgb(30, 81, 83);
-
 }
-.wrapper_share_post h1{
-   margin-top: 20px;
-   color:#f39308;
 
+.wrapper_share_post h1 {
+  margin-top: 20px;
+  color: #f39308;
 }
-.share_post_title_content{
+
+.share_post_title_content {
   margin-top: 20px;
   align-items: center;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
   row-gap: 10px;
 }
-.share_post_title_content .title::placeholder{
-  color:#ecf6c7;
 
+.share_post_title_content .title::placeholder {
+  color: #ecf6c7;
 }
-.share_post_title_content .title{
-  outline:none;
-  border:none;
+
+.share_post_title_content .title {
+  outline: none;
+  border: none;
   background-color: transparent;
   border-bottom: 2px solid #df8543;
-  height:20px;
-  width:300px;
+  height: 20px;
+  width: 300px;
   transition: 0.5s ease;
   font-weight: bold;
-  color:white;
-
+  color: white;
 }
-.share_post_title_content .title:focus{
+
+.share_post_title_content .title:focus {
   border-bottom: 2px solid #df8543;
-
 }
-.share_post_title_content .content{
+
+.share_post_title_content .content {
   z-index: 20;
   min-height: 400px;
   background-color: #ecf6c7;
-  width :450px;
+  width: 450px;
   font-weight: bold;
   padding-left: 20px;
-  padding-right:20px;
-  padding-top:10px;
+  padding-right: 20px;
+  padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 30px;
-  outline:none;
-  border:none;
+  outline: none;
+  border: none;
 }
 
 .file-input {
- 
   display: none;
 }
-
 
 .file-input-button {
   margin-top: 10px;
@@ -81,35 +89,34 @@
   color: #000000;
   border: none;
   font-size: 16px;
-  transition:0.5s ease;
-  border-radius:10px 0px 10px 10px;
-  border:1px solid #f39308;
+  transition: 0.5s ease;
+  border-radius: 10px 0px 10px 10px;
+  border: 1px solid #f39308;
 }
 
 .file-input-button:hover {
-  background-color:#f39308;
-  color:#ffffff;
-  border:1px solid #ecf6c7;
-  border-radius:0px 10px 10px 10px
+  background-color: #f39308;
+  color: #ffffff;
+  border: 1px solid #ecf6c7;
+  border-radius: 0px 10px 10px 10px;
 }
-
 
 .post_public_private select,
 .post_category select {
-   
-    padding-top: 8px;
-    background-color: #ecf6c7;
-    padding-bottom: 8px;
-    border: 1px solid #f39308;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
-    width: 100px;
-    margin-bottom: 2px;
-    margin-top:2px;
+  padding-top: 8px;
+  background-color: #ecf6c7;
+  padding-bottom: 8px;
+  border: 1px solid #f39308;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  width: 100px;
+  margin-bottom: 2px;
+  margin-top: 2px;
 }
 
-.wrapper_share_post button{
+.wrapper_share_post button,
+.post-btn {
   margin-top: 10px;
   cursor: pointer;
   padding: 8px 90px;
@@ -117,17 +124,20 @@
   color: #000000;
   border: none;
   font-size: 16px;
-  transition:0.5s ease;
-  border-radius:10px 0px 10px 10px;
-  border:1px solid #f39308;
+  transition: 0.5s ease;
+  border-radius: 10px 0px 10px 10px;
+  border: 1px solid #f39308;
 }
-.wrapper_share_post button:hover{
-  background-color:#f39308;
-  color:#ffffff;
-  border:1px solid #ecf6c7;
-  border-radius:0px 10px 10px 10px
+
+.wrapper_share_post button:hover,
+.post-btn:hover {
+  background-color: #f39308;
+  color: #ffffff;
+  border: 1px solid #ecf6c7;
+  border-radius: 0px 10px 10px 10px;
 }
-.leaf_6{
+
+.leaf_6 {
   z-index: 10;
   position: absolute;
   bottom: -21px;
@@ -139,10 +149,9 @@
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50px;
- 
 }
-.leaf_7{
 
+.leaf_7 {
   z-index: 30;
   position: absolute;
   top: 4px;
@@ -153,10 +162,9 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
- 
 }
-.leaf_8{
 
+.leaf_8 {
   z-index: 10;
   position: absolute;
   bottom: -7px;
@@ -167,13 +175,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
- 
 }
-
-
-
-
-
-
-
-
+.show_post_btn{
+  width: 100%;
+  display: flex;
+  margin-left: 50px;
+  /* margin-bottom: -50px; */
+}

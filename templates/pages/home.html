@@ -1,70 +1,79 @@
-{% extends 'base.html' %} {% block content %} {% if user.is_authenticated %}
+{% extends 'base.html' %} 
+{% block content %} 
+{% if user.is_authenticated %}
 <div class="wrapper_share_post">
-  <div class="home">
-    <div class="leaf_6">
-    </div>
-    <div class="leaf_7">
-    </div>
-    <div class="leaf_8">
-    </div>
-  <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
-    
-    {% csrf_token %}
-    <div><h1>Posts</h1></div>
-    <div class="share_post_title_content">
-      <input
-        class="title"
-        type="text"
-        name="title"
-        required
-        placeholder="Title"
-      />
-      <textarea
-        class="content"
-        name="content"
-        required
-        placeholder="Write your post..."
-      ></textarea>
-    </div>
-    <div class="share_image_pdf">
-      <input
-        type="file"
-        name="image"
-        accept="image/*"
-        id="image-input"
-        class="file-input"
-      />
-      <label for="image-input" class="file-input-button">Choose Img</label>
+  <div class="show_post_btn">
+  <button id="show-form-btn">Create a Post</button>
+  </div>
+  <div class="home" id="post-form" style="display: none;">
+    <div class="leaf_6"></div>
+    <div class="leaf_7"></div>
+    <div class="leaf_8"></div>
+    <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div><h1>Posts</h1></div>
+      <div class="share_post_title_content">
+        <input
+          class="title"
+          type="text"
+          name="title"
+          required
+          placeholder="Title"
+        />
+        <textarea
+          class="content"
+          name="content"
+          required
+          placeholder="Write your post..."
+        ></textarea>
+      </div>
+      <div class="share_image_pdf">
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          id="image-input"
+          class="file-input"
+        />
+        <label for="image-input" class="file-input-button">Choose Img</label>
 
-      <input
-        type="file"
-        name="pdf"
-        accept=".pdf"
-        id="pdf-input"
-        class="file-input"
-      />
-      <label for="pdf-input" class="file-input-button">Choose PDF</label>
-    </div>
-    <div class="post_public_catregory">
-      <div class="post_public_private">
-        <select name="visibility">
-          <option value="public">Public</option>
-          <option value="private">Private</option>
-        </select>
+        <input
+          type="file"
+          name="pdf"
+          accept=".pdf"
+          id="pdf-input"
+          class="file-input"
+        />
+        <label for="pdf-input" class="file-input-button">Choose PDF</label>
       </div>
-      <div class="post_category">
-        <select name="category" required placeholder="category">
-          <option value="News">News</option>
-          <option value="Question">Question</option>
-          <option value="Event">Event</option>
-          <option value="Tips">Tips</option>
-          <option value="Other">Other</option>
-        </select>
+      <div class="post_public_catregory">
+        <div class="post_public_private">
+          <select name="visibility">
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
+        </div>
+        <div class="post_category">
+          <select name="category" required placeholder="category">
+            <option value="News">News</option>
+            <option value="Question">Question</option>
+            <option value="Event">Event</option>
+            <option value="Tips">Tips</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <button class="post-btn" type="submit">Post</button>
-  </form>
+      <button class="post-btn" type="submit">Post</button>
+    </form>
   </div>
 </div>
-
-{% endif %} {% include "posts/posts.html" %} {% endblock content %}
+<script>
+  document.getElementById('show-form-btn').addEventListener('click', function() {
+    document.getElementById('post-form').style.display = 'block';
+    this.style.display = 'none';
+  });
+  </script>
+  
+{% endif %} 
+{% include "posts/posts.html" %} 
+{% endblock content %}

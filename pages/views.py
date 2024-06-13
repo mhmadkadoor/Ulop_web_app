@@ -230,6 +230,8 @@ def profile (request):
         elif 'btnUpdateBio' in request.POST:
             bio = request.POST.get('bio')
             profile = Profile.objects.get(user=current_user)
+            if len(bio) > 400:
+                return render(request, 'pages/profile.html', {'posts': Post.objects.all(),'user': current_user , 'UserS': User.objects.all(), 'thisPage': 'profile', 'bio_long': True})
             profile.bio = bio
             profile.save()
             messages.success(request, 'Bio updated successfully.')

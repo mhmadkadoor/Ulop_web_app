@@ -5,7 +5,7 @@
   
   display: flex;
   justify-content: center;
-  height: fit-content;
+ 
 
 }
 .view_profile p{
@@ -38,4 +38,37 @@
   width: 100%;
   height: 100%;
   object-fit: cover; 
+}
+.biography{
+  display: flex;
+  justify-content: center;  
+  margin-top: 40px;
+  height: 200px;
+  align-items: center;
+
+  margin-bottom: -200px;
+
+}
+.biography .bio{
+  
+  width:600px;
+  min-height: 200px;
+  border-radius: 50px 0px 50px 50px;
+  align-items: center;
+  text-align: center;
+}
+
+.biography .bio p{
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  margin-top: -30px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  padding-left: 10px;
+  padding-right:15px;
+}
+
+.ne_lan_div{
+  margin-top: 200px;
 }
