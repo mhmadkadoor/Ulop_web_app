@@ -106,7 +106,7 @@
 </div>
 
 {% for post in posts %}
-  {% if post.sender_id == user.id and not user.is_superuser %}
+  {% if post.sender_id == user.id %}
   <div class="container_post">
     <div class="wrapper_post">
       <h3>{{ post.title }}</h3>
@@ -128,12 +128,6 @@
 
 
         <p>{{ post.content }}</p>
-        
-        {% comment %} <a href="{% url 'view_profile' post.sender_id %}">
-          <p>
-            <img src="{{ post.owner.profile.image.url }}" alt="Comment Image" /> sender: {{ post.sender_name }}
-          </p>
-        </a> {% endcomment %}
         
         
         <div class="btn_post_all">

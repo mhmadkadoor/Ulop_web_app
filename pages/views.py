@@ -64,7 +64,7 @@ def edit_post(request, post_id):
 
     
     if request.method == 'POST':
-        if 'btnPostEdite' in request.POST:
+        if 'btnPostEdit' in request.POST:
             title = request.POST.get('title')
             filtered_title = filter_bad_words(title)
             content = request.POST.get('content')

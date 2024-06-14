@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-{% if post.active %}
+{% if post.active or user.is_superuser %}
 <div class="container_post go">
   <div class="wrapper_post go">
     <h3>{{ post.title }}</h3>
@@ -39,5 +39,9 @@
     {% include 'comments/comments.html' %}
   </div>
 </div>
+{% else %}
+<script>
+  window.location.href = "{% url 'home' %}";
+</script>
 {% endif %}
 {% endblock %}
